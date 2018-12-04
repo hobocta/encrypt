@@ -1,5 +1,6 @@
 {
     "name": "hobocta/encrypt",
+    "license": "MIT",
     "autoload": {
         "psr-4": {"Hobocta\\Encrypt\\": "src/"}
     }
