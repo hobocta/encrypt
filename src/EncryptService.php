@@ -2,10 +2,8 @@
 
 namespace Hobocta\Encrypt;
 
-use Hobocta\Encrypt\Encryptor\McryptEncryptor;
-use Hobocta\Encrypt\Encryptor\OpenSslEncryptor;
-use Hobocta\Encrypt\Stringify\Base64Stringify;
-use Hobocta\Encrypt\Stringify\Bin2HexStringify;
+use Hobocta\Encrypt\Encryptor\EncryptorInterface;
+use Hobocta\Encrypt\Stringify\StringifyInterface;
 
 class EncryptService
 {
@@ -21,27 +19,13 @@ class EncryptService
 
     /**
      * EncryptService constructor.
-     * @param $password
-     * @param string $stringifyMethod
-     * @throws \Exception
+     * @param EncryptorInterface $encryptor
+     * @param StringifyInterface $stringify
      */
-    public function __construct($password, $stringifyMethod = 'base64')
+    public function __construct(EncryptorInterface $encryptor, StringifyInterface $stringify)
     {
-        if (version_compare(PHP_VERSION, '7.1.0') >= 0) {
-            $key = hash('sha256', $password);
-            $this->encryptor = new OpenSslEncryptor($key);
-        } else {
-            $key = hash('sha1', $password);
-            $this->encryptor = new McryptEncryptor($key);
-        }
-
-        if ($stringifyMethod === 'base64') {
-            $this->stringify = new Base64Stringify;
-        } elseif ($stringifyMethod === 'bin2hex') {
-            $this->stringify = new Bin2HexStringify;
-        } else {
-            throw new \Exception('Incorrect stringifyMethod');
-        }
+        $this->encryptor = $encryptor;
+        $this->stringify = $stringify;
     }
 
     function encrypt($data)

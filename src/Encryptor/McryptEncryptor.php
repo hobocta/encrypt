@@ -10,26 +10,30 @@ class McryptEncryptor extends AbstractEncryptor implements EncryptorInterface
 
         /** @noinspection PhpDeprecationInspection */
         $encrypted = mcrypt_encrypt(
-            MCRYPT_BLOWFISH,
+            $this->options['cipher'],
             $this->key,
             $data,
-            MCRYPT_MODE_ECB,
+            $this->options['mode'],
             $iv
         );
 
-        return $encrypted;
+        return $iv . $encrypted;
     }
 
-    public function decrypt($string)
+    public function decrypt($data)
     {
-        $iv = $this->getIv();
+        $ivSize = $this->getIvSize();
+
+        $iv = substr($data, 0, $ivSize);
+
+        $data = substr($data, $ivSize);
 
         /** @noinspection PhpDeprecationInspection */
         $decrypted = mcrypt_decrypt(
-            MCRYPT_BLOWFISH,
+            $this->options['cipher'],
             $this->key,
-            $string,
-            MCRYPT_MODE_ECB,
+            $data,
+            $this->options['mode'],
             $iv
         );
 
@@ -38,12 +42,17 @@ class McryptEncryptor extends AbstractEncryptor implements EncryptorInterface
         return $decrypted;
     }
 
-    private function getIv()
+    private function getIvSize()
     {
         /** @noinspection PhpDeprecationInspection */
-        $ivSize = mcrypt_get_iv_size(MCRYPT_BLOWFISH, MCRYPT_MODE_ECB);
+        return mcrypt_get_iv_size($this->options['cipher'], $this->options['mode']);
+    }
+
+    private function getIv()
+    {
+        $ivSize = $this->getIvSize();
 
         /** @noinspection PhpDeprecationInspection */
-        return mcrypt_create_iv($ivSize, MCRYPT_RAND);
+        return mcrypt_create_iv($ivSize, $this->options['ivSource']);
     }
 }
