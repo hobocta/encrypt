@@ -24,9 +24,9 @@ class McryptEncryptor extends AbstractEncryptor implements EncryptorInterface
     {
         $ivSize = $this->getIvSize();
 
-        $iv = substr($data, 0, $ivSize);
+        $iv = $this->getBinarySubstring($data, 0, $ivSize);
 
-        $data = substr($data, $ivSize);
+        $data = $this->getBinarySubstring($data, $ivSize, $this->getBinaryLength($data) - $ivSize);
 
         /** @noinspection PhpDeprecationInspection */
         $decrypted = mcrypt_decrypt(
@@ -55,10 +55,33 @@ class McryptEncryptor extends AbstractEncryptor implements EncryptorInterface
         /** @noinspection PhpDeprecationInspection */
         $iv = mcrypt_create_iv($ivSize, $this->options['ivSource']);
 
-        if ((int)ini_get('mbstring.func_overload') !== 0) {
-            $iv = substr(hash('sha1', $iv), 0, $ivSize);
-        }
-
         return $iv;
+    }
+
+    /**
+     * Mcrypt returns iso-8859-1 encoded string,
+     * so we should use mb_* function on decryption with this encoding.
+     *
+     * @return string
+     */
+    private function getBinaryEncoding()
+    {
+        return 'iso-8859-1';
+    }
+
+    private function getBinaryLength($string)
+    {
+        return function_exists('mb_strlen')
+            ? mb_strlen($string, self::getBinaryEncoding())
+            : strlen($string);
+    }
+
+    private function getBinarySubstring($string, $start, $length)
+    {
+        if (function_exists('mb_substr')) {
+            return mb_substr($string, $start, $length, self::getBinaryEncoding());
+        } else {
+            return substr($string, $start, $length);
+        }
     }
 }
