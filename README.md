@@ -7,5 +7,8 @@ Easy way to use data encryption in php
 ## Usage
 See [demo.php](demo.php)
 
+## Run test
+`php demo.php`
+
 ## Run performance test
 `php performance_test.php`
