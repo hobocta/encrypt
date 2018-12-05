@@ -1,5 +1,6 @@
 <?php
 
+use Hobocta\Encrypt\Encryptor\McryptEncryptor;
 use Hobocta\Encrypt\Encryptor\OpenSslEncryptor;
 use Hobocta\Encrypt\EncryptService;
 use Hobocta\Encrypt\Stringify\Base64Stringify;
@@ -19,7 +20,7 @@ if (version_compare(PHP_VERSION, '7.1.0') >= 0) {
             hash('sha256', $password), // see more algorithms: hash_algos()
             array(
                 'method' => 'AES-256-CBC', // see more methods: openssl_get_cipher_methods()
-                'options' => OPENSSL_RAW_DATA,
+                'options' => OPENSSL_RAW_DATA, // disable base64 encode in openssl_encrypt to get raw data
             )
         ),
         new Base64Stringify
@@ -28,7 +29,7 @@ if (version_compare(PHP_VERSION, '7.1.0') >= 0) {
     echo 'Encryptor: Mcrypt' . PHP_EOL;
 
     $encryptService = new EncryptService(
-        new \Hobocta\Encrypt\Encryptor\McryptEncryptor(
+        new McryptEncryptor(
             hash('sha1', $password), // see more algorithms: hash_algos()
             array(
                 'cipher' => MCRYPT_BLOWFISH, // see more ciphers: http://php.net/manual/ru/mcrypt.ciphers.php
