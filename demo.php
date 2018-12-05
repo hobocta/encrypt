@@ -1,7 +1,7 @@
 <?php
 
-use Hobocta\Encrypt\Encryptor\McryptEncryptor;
-use Hobocta\Encrypt\Encryptor\OpenSslEncryptor;
+use Hobocta\Encrypt\Encryptor\Fabric\McryptEncryptorFabric;
+use Hobocta\Encrypt\Encryptor\Fabric\OpenSslEncryptorFabric;
 use Hobocta\Encrypt\EncryptService;
 use Hobocta\Encrypt\Stringify\Base64Stringify;
 
@@ -12,34 +12,24 @@ $data = 'My secret data!';
 
 echo 'PHP version: ' . PHP_VERSION . PHP_EOL;
 
+// see more algorithms: hash_algos()
+$key = hash('sha1', $password);
+
 if (version_compare(PHP_VERSION, '7.1.0') >= 0) {
     echo 'Encryptor: OpenSSL' . PHP_EOL;
 
-    $encryptService = new EncryptService(
-        new OpenSslEncryptor(
-            hash('sha256', $password), // see more algorithms: hash_algos()
-            array(
-                'method' => 'AES-256-CBC', // see more methods: openssl_get_cipher_methods()
-                'options' => OPENSSL_RAW_DATA, // disable base64 encode in openssl_encrypt to get raw data
-            )
-        ),
-        new Base64Stringify
-    );
+    $fabric = new OpenSslEncryptorFabric($key);
 } else {
     echo 'Encryptor: Mcrypt' . PHP_EOL;
 
-    $encryptService = new EncryptService(
-        new McryptEncryptor(
-            hash('sha1', $password), // see more algorithms: hash_algos()
-            array(
-                'cipher' => MCRYPT_BLOWFISH, // see more ciphers: http://php.net/manual/ru/mcrypt.ciphers.php
-                'mode' => MCRYPT_MODE_CBC, // see more modes: http://php.net/manual/ru/mcrypt.constants.php
-                'ivSource' => MCRYPT_RAND, // see more sources: http://php.net/manual/ru/mcrypt.constants.php
-            )
-        ),
-        new Base64Stringify
-    );
+    $fabric = new McryptEncryptorFabric($key);
 }
+
+$encryptor = $fabric->createSimpleEncryptor();
+//$encryptor = $fabric->createMediumEncryptor();
+//$encryptor = $fabric->createStrongEncryptor();
+
+$encryptService = new EncryptService($encryptor, new Base64Stringify());
 
 echo 'Data: ' . var_export($data, true) . PHP_EOL;
 
