@@ -52,12 +52,6 @@ class OpenSslEncryptor extends AbstractEncryptor implements EncryptorInterface
         return $iv;
     }
 
-    /**
-     * Mcrypt returns iso-8859-1 encoded string,
-     * so we should use mb_* function on decryption with this encoding.
-     *
-     * @return string
-     */
     protected function getBinaryEncoding()
     {
         return 'latin1';
