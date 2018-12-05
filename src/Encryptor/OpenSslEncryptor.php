@@ -6,9 +6,7 @@ class OpenSslEncryptor extends AbstractEncryptor implements EncryptorInterface
 {
     public function encrypt($data)
     {
-        $ivSize = openssl_cipher_iv_length($this->options['method']);
-
-        $iv = openssl_random_pseudo_bytes($ivSize);
+        $iv = $this->getIv();
 
         $encrypted = openssl_encrypt(
             $data,
@@ -21,20 +19,40 @@ class OpenSslEncryptor extends AbstractEncryptor implements EncryptorInterface
         return $iv . $encrypted;
     }
 
-    public function decrypt($data)
+    public function decrypt($encrypted)
     {
-        $ivSize = openssl_cipher_iv_length($this->options['method']);
+        $ivSize = $this->getIvSize();
 
-        $iv = substr($data, 0, $ivSize);
+        $iv = substr($encrypted, 0, $ivSize);
 
-        $data = openssl_decrypt(
-            substr($data, $ivSize),
+        $data = substr($encrypted, $ivSize);
+
+        $decrypted = openssl_decrypt(
+            $data,
             $this->options['method'],
             $this->key,
             $this->options['options'],
             $iv
         );
 
-        return $data;
+        return $decrypted;
+    }
+
+    private function getIvSize()
+    {
+        return openssl_cipher_iv_length($this->options['method']);
+    }
+
+    private function getIv()
+    {
+        $ivSize = $this->getIvSize();
+
+        $iv = openssl_random_pseudo_bytes($ivSize);
+
+        if ((int)ini_get('mbstring.func_overload') !== 0) {
+            $iv = substr(hash('sha1', $iv), 0, $ivSize);
+        }
+
+        return $iv;
     }
 }

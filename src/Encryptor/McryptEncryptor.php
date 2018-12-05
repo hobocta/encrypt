@@ -53,6 +53,12 @@ class McryptEncryptor extends AbstractEncryptor implements EncryptorInterface
         $ivSize = $this->getIvSize();
 
         /** @noinspection PhpDeprecationInspection */
-        return mcrypt_create_iv($ivSize, $this->options['ivSource']);
+        $iv = mcrypt_create_iv($ivSize, $this->options['ivSource']);
+
+        if ((int)ini_get('mbstring.func_overload') !== 0) {
+            $iv = substr(hash('sha1', $iv), 0, $ivSize);
+        }
+
+        return $iv;
     }
 }
