@@ -25,18 +25,25 @@ if (version_compare(PHP_VERSION, '7.1.0') >= 0) {
     $fabric = new McryptEncryptorFabric($key);
 }
 
-$encryptor = $fabric->createEncryptorVariantA();
-//$encryptor = $fabric->createEncryptorVariantB();
-//$encryptor = $fabric->createEncryptorVariantC();
+$encryptors = array(
+    'VariantA' => $fabric->createEncryptorVariantA(),
+    'VariantB' => $fabric->createEncryptorVariantB(),
+    'VariantC' => $fabric->createEncryptorVariantC(),
+);
 
-$encryptService = new EncryptService($encryptor, new Base64Stringify());
+foreach ($encryptors as $encryptorName => $encryptor) {
+    echo PHP_EOL;
+    echo $encryptorName . ':' . PHP_EOL;
 
-echo 'Data: ' . var_export($data, true) . PHP_EOL;
+    $encryptService = new EncryptService($encryptor, new Base64Stringify());
 
-$encrypted = $encryptService->encrypt($data);
-echo 'Encrypted: ' . var_export($encrypted, true) . PHP_EOL;
+    echo 'Data: ' . var_export($data, true) . PHP_EOL;
 
-$decrypted = $encryptService->decrypt($encrypted);
-echo 'Decrypted: ' . var_export($decrypted, true) . PHP_EOL;
+    $encrypted = $encryptService->encrypt($data);
+    echo 'Encrypted: ' . var_export($encrypted, true) . PHP_EOL;
 
-echo 'Result: ' . ($data === $decrypted ? 'Equals' : 'Failure') . PHP_EOL;
+    $decrypted = $encryptService->decrypt($encrypted);
+    echo 'Decrypted: ' . var_export($decrypted, true) . PHP_EOL;
+
+    echo 'Result: ' . ($data === $decrypted ? 'Equals' : 'Failure') . PHP_EOL;
+}
