@@ -20,13 +20,13 @@ class McryptEncryptor extends AbstractEncryptor implements EncryptorInterface
         return $iv . $encrypted;
     }
 
-    public function decrypt($data)
+    public function decrypt($encrypted)
     {
         $ivSize = $this->getIvSize();
 
-        $iv = $this->getBinarySubstring($data, 0, $ivSize);
+        $iv = $this->getBinarySubstring($encrypted, 0, $ivSize);
 
-        $data = $this->getBinarySubstring($data, $ivSize, $this->getBinaryLength($data) - $ivSize);
+        $data = $this->getBinarySubstring($encrypted, $ivSize, $this->getBinaryLength($encrypted) - $ivSize);
 
         /** @noinspection PhpDeprecationInspection */
         $decrypted = mcrypt_decrypt(
@@ -42,13 +42,13 @@ class McryptEncryptor extends AbstractEncryptor implements EncryptorInterface
         return $decrypted;
     }
 
-    private function getIvSize()
+    protected function getIvSize()
     {
         /** @noinspection PhpDeprecationInspection */
         return mcrypt_get_iv_size($this->options['cipher'], $this->options['mode']);
     }
 
-    private function getIv()
+    protected function getIv()
     {
         $ivSize = $this->getIvSize();
 
@@ -64,24 +64,8 @@ class McryptEncryptor extends AbstractEncryptor implements EncryptorInterface
      *
      * @return string
      */
-    private function getBinaryEncoding()
+    protected function getBinaryEncoding()
     {
         return 'iso-8859-1';
-    }
-
-    private function getBinaryLength($string)
-    {
-        return function_exists('mb_strlen')
-            ? mb_strlen($string, self::getBinaryEncoding())
-            : strlen($string);
-    }
-
-    private function getBinarySubstring($string, $start, $length)
-    {
-        if (function_exists('mb_substr')) {
-            return mb_substr($string, $start, $length, self::getBinaryEncoding());
-        } else {
-            return substr($string, $start, $length);
-        }
     }
 }

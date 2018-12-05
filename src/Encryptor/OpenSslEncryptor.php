@@ -23,9 +23,9 @@ class OpenSslEncryptor extends AbstractEncryptor implements EncryptorInterface
     {
         $ivSize = $this->getIvSize();
 
-        $iv = substr($encrypted, 0, $ivSize);
+        $iv = $this->getBinarySubstring($encrypted, 0, $ivSize);
 
-        $data = substr($encrypted, $ivSize);
+        $data = $this->getBinarySubstring($encrypted, $ivSize, $this->getBinaryLength($encrypted) - $ivSize);
 
         $decrypted = openssl_decrypt(
             $data,
@@ -38,21 +38,28 @@ class OpenSslEncryptor extends AbstractEncryptor implements EncryptorInterface
         return $decrypted;
     }
 
-    private function getIvSize()
+    protected function getIvSize()
     {
         return openssl_cipher_iv_length($this->options['method']);
     }
 
-    private function getIv()
+    protected function getIv()
     {
         $ivSize = $this->getIvSize();
 
         $iv = openssl_random_pseudo_bytes($ivSize);
 
-        if ((int)ini_get('mbstring.func_overload') !== 0) {
-            $iv = substr(hash('sha1', $iv), 0, $ivSize);
-        }
-
         return $iv;
+    }
+
+    /**
+     * Mcrypt returns iso-8859-1 encoded string,
+     * so we should use mb_* function on decryption with this encoding.
+     *
+     * @return string
+     */
+    protected function getBinaryEncoding()
+    {
+        return 'latin1';
     }
 }
