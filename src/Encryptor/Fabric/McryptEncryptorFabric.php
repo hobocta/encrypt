@@ -8,7 +8,7 @@ class McryptEncryptorFabric extends AbstractEncryptorFabric
 {
     public function createEncryptorVariantA()
     {
-        $cipher = MCRYPT_3DES;
+        $cipher = MCRYPT_RIJNDAEL_128;
         $mode = MCRYPT_MODE_CBC;
 
         /** @noinspection PhpDeprecationInspection */
@@ -26,20 +26,25 @@ class McryptEncryptorFabric extends AbstractEncryptorFabric
 
     public function createEncryptorVariantB()
     {
+        $cipher = MCRYPT_RIJNDAEL_192;
+        $mode = MCRYPT_MODE_CBC;
+
+        /** @noinspection PhpDeprecationInspection */
+        $key = substr($this->key, 0, mcrypt_get_key_size($cipher, $mode));
+
         return new McryptEncryptor(
-            $this->key,
+            $key,
             array(
-                'cipher' => MCRYPT_BLOWFISH, // see more ciphers: http://php.net/manual/ru/mcrypt.ciphers.php
-                'mode' => MCRYPT_MODE_CBC, // see more modes: http://php.net/manual/ru/mcrypt.constants.php
+                'cipher' => $cipher, // see more ciphers: http://php.net/manual/ru/mcrypt.ciphers.php
+                'mode' => $mode, // see more modes: http://php.net/manual/ru/mcrypt.constants.php
                 'ivSource' => MCRYPT_RAND, // see more sources: http://php.net/manual/ru/mcrypt.constants.php
             )
         );
     }
 
-    // recommended for mcrypt
     public function createEncryptorVariantC()
     {
-        $cipher = MCRYPT_TWOFISH;
+        $cipher = MCRYPT_RIJNDAEL_256;
         $mode = MCRYPT_MODE_CBC;
 
         /** @noinspection PhpDeprecationInspection */
