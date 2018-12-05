@@ -54,6 +54,6 @@ class OpenSslEncryptor extends AbstractEncryptor implements EncryptorInterface
 
     protected function getBinaryEncoding()
     {
-        return 'latin1';
+        return '8bit';
     }
 }
