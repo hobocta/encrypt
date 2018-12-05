@@ -1,7 +1,6 @@
 <?php
 
 use Hobocta\Encrypt\Stringify\NoneStringify;
-use Hobocta\Encrypt\Stringify\StringifyInterface;
 use PHPUnit\Framework\TestCase;
 
 final class NoneStringifyTest extends TestCase

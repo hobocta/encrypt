@@ -1,9 +1,6 @@
 <?php
 
-use Hobocta\Encrypt\Encryptor\Fabric\AbstractEncryptorFabric;
-use Hobocta\Encrypt\Encryptor\Fabric\EncryptorFabricInterface;
 use Hobocta\Encrypt\Encryptor\Fabric\OpenSslEncryptorFabric;
-use Hobocta\Encrypt\Encryptor\OpenSslEncryptor;
 use PHPUnit\Framework\TestCase;
 
 final class OpenSslEncryptorFabricTest extends TestCase

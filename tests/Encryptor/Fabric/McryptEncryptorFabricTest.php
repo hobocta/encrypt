@@ -1,9 +1,6 @@
 <?php
 
-use Hobocta\Encrypt\Encryptor\Fabric\AbstractEncryptorFabric;
-use Hobocta\Encrypt\Encryptor\Fabric\EncryptorFabricInterface;
 use Hobocta\Encrypt\Encryptor\Fabric\McryptEncryptorFabric;
-use Hobocta\Encrypt\Encryptor\McryptEncryptor;
 use PHPUnit\Framework\TestCase;
 
 final class McryptEncryptorFabricTest extends TestCase

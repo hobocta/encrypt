@@ -1,7 +1,5 @@
 <?php
 
-use Hobocta\Encrypt\Encryptor\AbstractEncryptor;
-use Hobocta\Encrypt\Encryptor\EncryptorInterface;
 use Hobocta\Encrypt\Encryptor\Fabric\McryptEncryptorFabric;
 use Hobocta\Encrypt\Encryptor\McryptEncryptor;
 use PHPUnit\Framework\TestCase;

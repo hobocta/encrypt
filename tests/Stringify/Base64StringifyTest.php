@@ -1,7 +1,6 @@
 <?php
 
 use Hobocta\Encrypt\Stringify\Base64Stringify;
-use Hobocta\Encrypt\Stringify\StringifyInterface;
 use PHPUnit\Framework\TestCase;
 
 final class Base64StringifyTest extends TestCase

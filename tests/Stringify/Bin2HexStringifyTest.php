@@ -1,7 +1,6 @@
 <?php
 
 use Hobocta\Encrypt\Stringify\Bin2HexStringify;
-use Hobocta\Encrypt\Stringify\StringifyInterface;
 use PHPUnit\Framework\TestCase;
 
 final class Bin2HexStringifyTest extends TestCase
