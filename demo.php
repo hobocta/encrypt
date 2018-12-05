@@ -25,9 +25,9 @@ if (version_compare(PHP_VERSION, '7.1.0') >= 0) {
     $fabric = new McryptEncryptorFabric($key);
 }
 
-$encryptor = $fabric->createSimpleEncryptor();
-//$encryptor = $fabric->createMediumEncryptor();
-//$encryptor = $fabric->createStrongEncryptor();
+$encryptor = $fabric->createEncryptorVariantA();
+//$encryptor = $fabric->createEncryptorVariantB();
+//$encryptor = $fabric->createEncryptorVariantC();
 
 $encryptService = new EncryptService($encryptor, new Base64Stringify());
 

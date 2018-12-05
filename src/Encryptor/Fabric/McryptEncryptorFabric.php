@@ -6,7 +6,7 @@ use Hobocta\Encrypt\Encryptor\McryptEncryptor;
 
 class McryptEncryptorFabric extends AbstractEncryptorFabric
 {
-    public function createSimpleEncryptor()
+    public function createEncryptorVariantA()
     {
         $cipher = MCRYPT_3DES;
         $mode = MCRYPT_MODE_CBC;
@@ -24,7 +24,7 @@ class McryptEncryptorFabric extends AbstractEncryptorFabric
         );
     }
 
-    public function createMediumEncryptor()
+    public function createEncryptorVariantB()
     {
         return new McryptEncryptor(
             $this->key,
@@ -36,7 +36,8 @@ class McryptEncryptorFabric extends AbstractEncryptorFabric
         );
     }
 
-    public function createStrongEncryptor()
+    // recommended for mcrypt
+    public function createEncryptorVariantC()
     {
         $cipher = MCRYPT_TWOFISH;
         $mode = MCRYPT_MODE_CBC;
