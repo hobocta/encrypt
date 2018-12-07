@@ -6,7 +6,7 @@ use Hobocta\Encrypt\Encryptor\OpenSslEncryptor;
 
 class OpenSslEncryptorFabric extends AbstractEncryptorFabric
 {
-    public function createEncryptorVariantA()
+    public function createEncryptor128()
     {
         return new OpenSslEncryptor(
             $this->key,
@@ -17,7 +17,7 @@ class OpenSslEncryptorFabric extends AbstractEncryptorFabric
         );
     }
 
-    public function createEncryptorVariantB()
+    public function createEncryptor192()
     {
         return new OpenSslEncryptor(
             $this->key,
@@ -28,7 +28,7 @@ class OpenSslEncryptorFabric extends AbstractEncryptorFabric
         );
     }
 
-    public function createEncryptorVariantC()
+    public function createEncryptor256()
     {
         return new OpenSslEncryptor(
             $this->key,

@@ -24,18 +24,18 @@ class EncryptorFabric implements EncryptorFabricInterface
         }
     }
 
-    public function createEncryptorVariantA()
+    public function createEncryptor128()
     {
-        return $this->fabric->createEncryptorVariantA();
+        return $this->fabric->createEncryptor128();
     }
 
-    public function createEncryptorVariantB()
+    public function createEncryptor192()
     {
-        return $this->fabric->createEncryptorVariantB();
+        return $this->fabric->createEncryptor192();
     }
 
-    public function createEncryptorVariantC()
+    public function createEncryptor256()
     {
-        return $this->fabric->createEncryptorVariantC();
+        return $this->fabric->createEncryptor256();
     }
 }

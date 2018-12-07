@@ -1,9 +1,6 @@
 <?php
 
-use Hobocta\Encrypt\Encryptor\EncryptorAvailableChecker;
 use Hobocta\Encrypt\Encryptor\Fabric\EncryptorFabric;
-use Hobocta\Encrypt\Encryptor\Fabric\McryptEncryptorFabric;
-use Hobocta\Encrypt\Encryptor\Fabric\OpenSslEncryptorFabric;
 use Hobocta\Encrypt\EncryptService;
 use Hobocta\Encrypt\Stringify\Base64Stringify;
 
@@ -11,8 +8,6 @@ require __DIR__ . '/vendor/autoload.php';
 
 $password = '1234';
 $data = 'My secret data!';
-
-echo 'PHP version: ' . PHP_VERSION . PHP_EOL;
 
 // see more algorithms: hash_algos()
 $key = hash('sha1', $password);
@@ -24,9 +19,9 @@ try {
 }
 
 $encryptors = array(
-    'VariantA' => $fabric->createEncryptorVariantA(),
-    'VariantB' => $fabric->createEncryptorVariantB(),
-    'VariantC' => $fabric->createEncryptorVariantC(),
+    '128 bit' => $fabric->createEncryptor128(),
+    '192 bit' => $fabric->createEncryptor192(),
+    '256 bit' => $fabric->createEncryptor256(),
 );
 
 foreach ($encryptors as $encryptorName => $encryptor) {

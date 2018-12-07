@@ -4,9 +4,9 @@ namespace Hobocta\Encrypt\Encryptor\Fabric;
 
 interface EncryptorFabricInterface
 {
-    public function createEncryptorVariantA();
+    public function createEncryptor128();
 
-    public function createEncryptorVariantB();
+    public function createEncryptor192();
 
-    public function createEncryptorVariantC();
+    public function createEncryptor256();
 }

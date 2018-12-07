@@ -17,8 +17,8 @@ final class McryptEncryptorFabricTest extends TestCase
         $this->assertInstanceOf('\Hobocta\Encrypt\Encryptor\Fabric\AbstractEncryptorFabric', $fabric);
         $this->assertInstanceOf('\Hobocta\Encrypt\Encryptor\Fabric\EncryptorFabricInterface', $fabric);
 
-        $this->assertInstanceOf('\Hobocta\Encrypt\Encryptor\McryptEncryptor', $fabric->createEncryptorVariantA());
-        $this->assertInstanceOf('\Hobocta\Encrypt\Encryptor\McryptEncryptor', $fabric->createEncryptorVariantB());
-        $this->assertInstanceOf('\Hobocta\Encrypt\Encryptor\McryptEncryptor', $fabric->createEncryptorVariantC());
+        $this->assertInstanceOf('\Hobocta\Encrypt\Encryptor\McryptEncryptor', $fabric->createEncryptor128());
+        $this->assertInstanceOf('\Hobocta\Encrypt\Encryptor\McryptEncryptor', $fabric->createEncryptor192());
+        $this->assertInstanceOf('\Hobocta\Encrypt\Encryptor\McryptEncryptor', $fabric->createEncryptor256());
     }
 }

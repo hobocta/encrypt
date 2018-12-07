@@ -18,15 +18,15 @@ final class OpenSslEncryptorFabricTest extends TestCase
         $this->assertInstanceOf('\Hobocta\Encrypt\Encryptor\Fabric\EncryptorFabricInterface', $fabric);
         $this->assertInstanceOf(
             '\Hobocta\Encrypt\Encryptor\OpenSslEncryptor',
-            $fabric->createEncryptorVariantA()
+            $fabric->createEncryptor128()
         );
         $this->assertInstanceOf(
             '\Hobocta\Encrypt\Encryptor\OpenSslEncryptor',
-            $fabric->createEncryptorVariantB()
+            $fabric->createEncryptor192()
         );
         $this->assertInstanceOf(
             '\Hobocta\Encrypt\Encryptor\OpenSslEncryptor',
-            $fabric->createEncryptorVariantC()
+            $fabric->createEncryptor256()
         );
     }
 }

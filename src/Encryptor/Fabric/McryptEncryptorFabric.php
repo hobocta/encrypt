@@ -6,7 +6,7 @@ use Hobocta\Encrypt\Encryptor\McryptEncryptor;
 
 class McryptEncryptorFabric extends AbstractEncryptorFabric
 {
-    public function createEncryptorVariantA()
+    public function createEncryptor128()
     {
         $cipher = MCRYPT_RIJNDAEL_128;
         $mode = MCRYPT_MODE_CBC;
@@ -24,7 +24,7 @@ class McryptEncryptorFabric extends AbstractEncryptorFabric
         );
     }
 
-    public function createEncryptorVariantB()
+    public function createEncryptor192()
     {
         $cipher = MCRYPT_RIJNDAEL_192;
         $mode = MCRYPT_MODE_CBC;
@@ -42,7 +42,7 @@ class McryptEncryptorFabric extends AbstractEncryptorFabric
         );
     }
 
-    public function createEncryptorVariantC()
+    public function createEncryptor256()
     {
         $cipher = MCRYPT_RIJNDAEL_256;
         $mode = MCRYPT_MODE_CBC;

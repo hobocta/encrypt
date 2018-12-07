@@ -15,13 +15,13 @@ $key = hash('sha1', $password);
 try {
     $fabric = new EncryptorFabric($key);
 } catch (Exception $e) {
-    die(sprintf('Exception message: %s (%s:%s)', $e->getMessage(), $e->getFile(), $e->getLine()));
+    die(sprintf('Exception message: %s (%s:%s)', $e->getMessage(), $e->getFile(), $e->getLine()) . PHP_EOL);
 }
 
 $encryptors = array(
-    'VariantA' => $fabric->createEncryptorVariantA(),
-    'VariantB' => $fabric->createEncryptorVariantB(),
-    'VariantC' => $fabric->createEncryptorVariantC(),
+    '128 bit' => $fabric->createEncryptor128(),
+    '192 bit' => $fabric->createEncryptor192(),
+    '256 bit' => $fabric->createEncryptor256(),
 );
 
 $count = 10000;

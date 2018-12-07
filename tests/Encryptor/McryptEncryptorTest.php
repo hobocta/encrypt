@@ -31,9 +31,9 @@ final class McryptEncryptorTest extends TestCase
 
         foreach (
             array(
-                $fabric->createEncryptorVariantA(),
-                $fabric->createEncryptorVariantB(),
-                $fabric->createEncryptorVariantC(),
+                $fabric->createEncryptor128(),
+                $fabric->createEncryptor192(),
+                $fabric->createEncryptor256(),
             ) as $encryptor
         ) {
             $data = uniqid(true);
