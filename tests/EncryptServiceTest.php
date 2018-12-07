@@ -23,11 +23,11 @@ final class EncryptServiceTest extends TestCase
         $encryptorFabrics = array();
 
         if (OpenSslAvailableChecker::isAvailable()) {
-            $encryptorFabrics['OpenSSL'] = new OpenSslEncryptorFabric($key);
+            $encryptorFabrics = new OpenSslEncryptorFabric($key);
         }
 
         if (McryptAvailableChecker::isAvailable()) {
-            $encryptorFabrics['Mcrypt'] =  new McryptEncryptorFabric($key);
+            $encryptorFabrics =  new McryptEncryptorFabric($key);
         }
 
         foreach ($encryptorFabrics as $encryptorFabric) {

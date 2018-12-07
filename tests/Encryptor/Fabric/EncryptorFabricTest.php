@@ -39,19 +39,19 @@ class EncryptorFabricTest extends TestCase
     public function testValidate()
     {
         try {
-            $encryptorFabric = new EncryptorFabric('');
+            new EncryptorFabric('');
             $this->fail('Expected exception not thrown');
         } catch (EncryptException $e) {
         }
 
         try {
-            $encryptorFabric = new EncryptorFabric(1);
+            new EncryptorFabric(1);
             $this->fail('Expected exception not thrown');
         } catch (EncryptException $e) {
         }
 
         try {
-            $encryptorFabric = new EncryptorFabric(array());
+            new EncryptorFabric(array());
             $this->fail('Expected exception not thrown');
         } catch (EncryptException $e) {
         }
