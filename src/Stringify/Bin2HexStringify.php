@@ -18,7 +18,7 @@ final class Bin2HexStringify implements StringifyInterface
         }
     }
 
-    private function hexToBin($hexString)
+    public function hexToBin($hexString)
     {
         $length = strlen($hexString);
 

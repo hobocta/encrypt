@@ -21,4 +21,14 @@ final class Bin2HexStringifyTest extends TestCase
 
         $this->assertEquals($stringify->fromString($dataEncoded), $data);
     }
+
+    public function testHexToBin()
+    {
+        $stringify = new Bin2HexStringify();
+
+        $data = '12qwASzxER!@';
+        $dataEncoded = '3132717741537a7845522140';
+
+        $this->assertEquals($stringify->hexToBin($dataEncoded), $data);
+    }
 }
