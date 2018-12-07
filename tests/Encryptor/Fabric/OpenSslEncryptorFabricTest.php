@@ -1,5 +1,6 @@
 <?php
 
+use Hobocta\Encrypt\Encryptor\EncryptorAvailableChecker;
 use Hobocta\Encrypt\Encryptor\Fabric\OpenSslEncryptorFabric;
 use PHPUnit\Framework\TestCase;
 
@@ -7,7 +8,7 @@ final class OpenSslEncryptorFabricTest extends TestCase
 {
     public function testInstanceOf()
     {
-        if (version_compare(PHP_VERSION, '7.1.0') < 0) {
+        if (!EncryptorAvailableChecker::isOpenSSLAvailable()) {
             $this->assertEmpty('');
             return;
         }

@@ -1,5 +1,7 @@
 <?php
 
+use Hobocta\Encrypt\Encryptor\EncryptorAvailableChecker;
+use Hobocta\Encrypt\Encryptor\Fabric\EncryptorFabric;
 use Hobocta\Encrypt\Encryptor\Fabric\McryptEncryptorFabric;
 use Hobocta\Encrypt\Encryptor\Fabric\OpenSslEncryptorFabric;
 use Hobocta\Encrypt\EncryptService;
@@ -15,14 +17,10 @@ echo 'PHP version: ' . PHP_VERSION . PHP_EOL;
 // see more algorithms: hash_algos()
 $key = hash('sha1', $password);
 
-if (version_compare(PHP_VERSION, '7.1.0') >= 0) {
-    echo 'Encryptor: OpenSSL' . PHP_EOL;
-
-    $fabric = new OpenSslEncryptorFabric($key);
-} else {
-    echo 'Encryptor: Mcrypt' . PHP_EOL;
-
-    $fabric = new McryptEncryptorFabric($key);
+try {
+    $fabric = new EncryptorFabric($key);
+} catch (Exception $e) {
+    die(sprintf('Exception message: %s (%s:%s)', $e->getMessage(), $e->getFile(), $e->getLine()) . PHP_EOL);
 }
 
 $encryptors = array(

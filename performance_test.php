@@ -1,7 +1,6 @@
 <?php
 
-use Hobocta\Encrypt\Encryptor\Fabric\McryptEncryptorFabric;
-use Hobocta\Encrypt\Encryptor\Fabric\OpenSslEncryptorFabric;
+use Hobocta\Encrypt\Encryptor\Fabric\EncryptorFabric;
 use Hobocta\Encrypt\EncryptService;
 use Hobocta\Encrypt\Stringify\Base64Stringify;
 
@@ -13,10 +12,10 @@ $data = 'My secret data!';
 // see more algorithms: hash_algos()
 $key = hash('sha1', $password);
 
-if (version_compare(PHP_VERSION, '7.1.0') >= 0) {
-    $fabric = new OpenSslEncryptorFabric($key);
-} else {
-    $fabric = new McryptEncryptorFabric($key);
+try {
+    $fabric = new EncryptorFabric($key);
+} catch (Exception $e) {
+    die(sprintf('Exception message: %s (%s:%s)', $e->getMessage(), $e->getFile(), $e->getLine()));
 }
 
 $encryptors = array(

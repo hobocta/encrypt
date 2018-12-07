@@ -1,5 +1,6 @@
 <?php
 
+use Hobocta\Encrypt\Encryptor\EncryptorAvailableChecker;
 use Hobocta\Encrypt\Encryptor\Fabric\McryptEncryptorFabric;
 use Hobocta\Encrypt\Encryptor\McryptEncryptor;
 use PHPUnit\Framework\TestCase;
@@ -8,7 +9,7 @@ final class McryptEncryptorTest extends TestCase
 {
     public function testInstanceOf()
     {
-        if (version_compare(PHP_VERSION, '7.1.0') >= 0) {
+        if (!EncryptorAvailableChecker::isMcryptAvailable()) {
             $this->assertEmpty('');
             return;
         }
@@ -19,7 +20,7 @@ final class McryptEncryptorTest extends TestCase
 
     public function testEncryptAndDecrypt()
     {
-        if (version_compare(PHP_VERSION, '7.1.0') >= 0) {
+        if (!EncryptorAvailableChecker::isMcryptAvailable()) {
             $this->assertEmpty('');
             return;
         }

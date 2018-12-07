@@ -1,5 +1,6 @@
 <?php
 
+use Hobocta\Encrypt\Encryptor\EncryptorAvailableChecker;
 use Hobocta\Encrypt\Encryptor\Fabric\McryptEncryptorFabric;
 use Hobocta\Encrypt\Encryptor\Fabric\OpenSslEncryptorFabric;
 use Hobocta\Encrypt\EncryptService;
@@ -14,11 +15,14 @@ final class EncryptServiceTest extends TestCase
     {
         $key = hash('sha1', uniqid(true));
 
-        if (version_compare(PHP_VERSION, '7.1.0') >= 0) {
+        if (EncryptorAvailableChecker::isOpenSSLAvailable()) {
             $fabric = new OpenSslEncryptorFabric($key);
-        } else {
+        } elseif (EncryptorAvailableChecker::isMcryptAvailable()) {
             $fabric = new McryptEncryptorFabric($key);
         }
+
+        /** @noinspection PhpUndefinedVariableInspection */
+        $this->assertInstanceOf('\Hobocta\Encrypt\Encryptor\Fabric\EncryptorFabricInterface', $fabric);
 
         foreach (
             array(
