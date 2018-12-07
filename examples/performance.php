@@ -1,6 +1,5 @@
 <?php
 
-use Hobocta\Encrypt\Encryptor\Fabric\EncryptorFabric;
 use Hobocta\Encrypt\Encryptor\Implementation\Mcrypt\McryptAvailableChecker;
 use Hobocta\Encrypt\Encryptor\Implementation\Mcrypt\McryptEncryptorFabric;
 use Hobocta\Encrypt\Encryptor\Implementation\OpenSsl\OpenSslAvailableChecker;
