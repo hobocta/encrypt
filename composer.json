@@ -1,6 +1,8 @@
 {
     "name": "hobocta/encrypt",
+    "description": "Easy way to use data encryption",
     "license": "MIT",
+    "authors": [{"name": "Anton Kondratov", "email": "contact@site-home.ru"}],
     "require": {
         "php" : "^5.3.3 || ^7.0"
     },
