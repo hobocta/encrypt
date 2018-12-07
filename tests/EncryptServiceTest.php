@@ -5,6 +5,7 @@ use Hobocta\Encrypt\Encryptor\Implementation\Mcrypt\McryptEncryptorFabric;
 use Hobocta\Encrypt\Encryptor\Implementation\OpenSsl\OpenSslAvailableChecker;
 use Hobocta\Encrypt\Encryptor\Implementation\OpenSsl\OpenSslEncryptorFabric;
 use Hobocta\Encrypt\EncryptService;
+use Hobocta\Encrypt\Exception\EncryptException;
 use Hobocta\Encrypt\Stringify\Base64Stringify;
 use Hobocta\Encrypt\Stringify\Bin2HexStringify;
 use Hobocta\Encrypt\Stringify\NoneStringify;
@@ -12,42 +13,53 @@ use PHPUnit\Framework\TestCase;
 
 final class EncryptServiceTest extends TestCase
 {
+    /**
+     * @throws EncryptException
+     */
     public function testConvert()
     {
         $key = hash('sha1', uniqid(true));
 
+        $encryptorFabrics = array();
+
         if (OpenSslAvailableChecker::isAvailable()) {
-            $encryptorFabric = new OpenSslEncryptorFabric($key);
-        } elseif (McryptAvailableChecker::isAvailable()) {
-            $encryptorFabric = new McryptEncryptorFabric($key);
+            $encryptorFabrics['OpenSSL'] = new OpenSslEncryptorFabric($key);
         }
 
-        /** @noinspection PhpUndefinedVariableInspection */
-        $this->assertInstanceOf('\Hobocta\Encrypt\Encryptor\Fabric\EncryptorFabricInterface', $encryptorFabric);
+        if (McryptAvailableChecker::isAvailable()) {
+            $encryptorFabrics['Mcrypt'] =  new McryptEncryptorFabric($key);
+        }
 
-        foreach (
-            array(
-                $encryptorFabric->createEncryptor128(),
-                $encryptorFabric->createEncryptor192(),
-                $encryptorFabric->createEncryptor256(),
-            ) as $encryptor
-        ) {
+        foreach ($encryptorFabrics as $encryptorFabric) {
+            $this->assertInstanceOf(
+                '\Hobocta\Encrypt\Encryptor\Fabric\EncryptorFabricInterface',
+                $encryptorFabric
+            );
+
             foreach (
                 array(
-                    new Base64Stringify(),
-                    new Bin2HexStringify(),
-                    new NoneStringify(),
-                ) as $stringify
+                    $encryptorFabric->createEncryptor128(),
+                    $encryptorFabric->createEncryptor192(),
+                    $encryptorFabric->createEncryptor256(),
+                ) as $encryptor
             ) {
-                $data = uniqid(true);
+                foreach (
+                    array(
+                        new Base64Stringify(),
+                        new Bin2HexStringify(),
+                        new NoneStringify(),
+                    ) as $stringify
+                ) {
+                    $data = uniqid(true);
 
-                $encryptService = new EncryptService($encryptor, $stringify);
+                    $encryptService = new EncryptService($encryptor, $stringify);
 
-                $encrypted = $encryptService->encrypt($data);
+                    $encrypted = $encryptService->encrypt($data);
 
-                $decrypted = $encryptService->decrypt($encrypted);
+                    $decrypted = $encryptService->decrypt($encrypted);
 
-                $this->assertEquals($data, $decrypted);
+                    $this->assertEquals($data, $decrypted);
+                }
             }
         }
     }

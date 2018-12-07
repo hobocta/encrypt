@@ -7,7 +7,10 @@ final class OpenSslAvailableCheckerTest extends TestCase
 {
     public function testInstanceOf()
     {
-        $this->assertInstanceOf('\Hobocta\Encrypt\Encryptor\Checker\AvailableCheckerInterface', new OpenSslAvailableChecker);
+        $this->assertInstanceOf(
+            '\Hobocta\Encrypt\Encryptor\Checker\AvailableCheckerInterface',
+            new OpenSslAvailableChecker
+        );
     }
 
     public function isAvailableTest()

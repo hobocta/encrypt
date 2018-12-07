@@ -3,25 +3,48 @@
 use Hobocta\Encrypt\Encryptor\Implementation\Mcrypt\McryptAvailableChecker;
 use Hobocta\Encrypt\Encryptor\Implementation\Mcrypt\McryptEncryptor;
 use Hobocta\Encrypt\Encryptor\Implementation\Mcrypt\McryptEncryptorFabric;
+use Hobocta\Encrypt\Exception\EncryptException;
 use PHPUnit\Framework\TestCase;
 
 final class McryptEncryptorTest extends TestCase
 {
+    /**
+     * @throws EncryptException
+     */
     public function testInstanceOf()
     {
         if (!McryptAvailableChecker::isAvailable()) {
-            $this->assertEmpty('');
+            $this->assertFalse(false);
             return;
         }
 
-        $this->assertInstanceOf('\Hobocta\Encrypt\Encryptor\AbstractEncryptor', new McryptEncryptor('', array()));
-        $this->assertInstanceOf('\Hobocta\Encrypt\Encryptor\EncryptorInterface', new McryptEncryptor('', array()));
+        $mcryptEncryptor = new McryptEncryptor(
+            uniqid(true),
+            array(
+                'cipher' => uniqid(true),
+                'mode' => uniqid(true),
+                'ivSource' => uniqid(true)
+            )
+        );
+
+        $this->assertInstanceOf(
+            '\Hobocta\Encrypt\Encryptor\AbstractEncryptor',
+            $mcryptEncryptor
+        );
+
+        $this->assertInstanceOf(
+            '\Hobocta\Encrypt\Encryptor\EncryptorInterface',
+            $mcryptEncryptor
+        );
     }
 
+    /**
+     * @throws EncryptException
+     */
     public function testEncryptAndDecrypt()
     {
         if (!McryptAvailableChecker::isAvailable()) {
-            $this->assertEmpty('');
+            $this->assertFalse(false);
             return;
         }
 

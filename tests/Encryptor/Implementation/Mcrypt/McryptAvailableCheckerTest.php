@@ -7,7 +7,10 @@ final class McryptAvailableCheckerTest extends TestCase
 {
     public function testInstanceOf()
     {
-        $this->assertInstanceOf('\Hobocta\Encrypt\Encryptor\Checker\AvailableCheckerInterface', new McryptAvailableChecker);
+        $this->assertInstanceOf(
+            '\Hobocta\Encrypt\Encryptor\Checker\AvailableCheckerInterface',
+            new McryptAvailableChecker
+        );
     }
 
     public function isAvailableTest()

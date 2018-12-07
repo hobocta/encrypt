@@ -2,23 +2,43 @@
 
 use Hobocta\Encrypt\Encryptor\Implementation\Mcrypt\McryptAvailableChecker;
 use Hobocta\Encrypt\Encryptor\Implementation\Mcrypt\McryptEncryptorFabric;
+use Hobocta\Encrypt\Exception\EncryptException;
 use PHPUnit\Framework\TestCase;
 
 final class McryptEncryptorFabricTest extends TestCase
 {
+    /**
+     * @throws EncryptException
+     */
     public function testInstanceOf()
     {
         if (!McryptAvailableChecker::isAvailable()) {
-            $this->assertEmpty('');
+            $this->assertFalse(false);
             return;
         }
 
-        $encryptorFabric = new McryptEncryptorFabric('');
-        $this->assertInstanceOf('\Hobocta\Encrypt\Encryptor\Fabric\AbstractEncryptorFabric', $encryptorFabric);
-        $this->assertInstanceOf('\Hobocta\Encrypt\Encryptor\Fabric\EncryptorFabricInterface', $encryptorFabric);
+        /** @noinspection PhpUnhandledExceptionInspection */
+        $encryptorFabric = new McryptEncryptorFabric(uniqid(true));
+        $this->assertInstanceOf(
+            '\Hobocta\Encrypt\Encryptor\Fabric\AbstractEncryptorFabric',
+            $encryptorFabric
+        );
+        $this->assertInstanceOf(
+            '\Hobocta\Encrypt\Encryptor\Fabric\EncryptorFabricInterface',
+            $encryptorFabric
+        );
 
-        $this->assertInstanceOf('\Hobocta\Encrypt\Encryptor\Implementation\Mcrypt\McryptEncryptor', $encryptorFabric->createEncryptor128());
-        $this->assertInstanceOf('\Hobocta\Encrypt\Encryptor\Implementation\Mcrypt\McryptEncryptor', $encryptorFabric->createEncryptor192());
-        $this->assertInstanceOf('\Hobocta\Encrypt\Encryptor\Implementation\Mcrypt\McryptEncryptor', $encryptorFabric->createEncryptor256());
+        $this->assertInstanceOf(
+            '\Hobocta\Encrypt\Encryptor\Implementation\Mcrypt\McryptEncryptor',
+            $encryptorFabric->createEncryptor128()
+        );
+        $this->assertInstanceOf(
+            '\Hobocta\Encrypt\Encryptor\Implementation\Mcrypt\McryptEncryptor',
+            $encryptorFabric->createEncryptor192()
+        );
+        $this->assertInstanceOf(
+            '\Hobocta\Encrypt\Encryptor\Implementation\Mcrypt\McryptEncryptor',
+            $encryptorFabric->createEncryptor256()
+        );
     }
 }
