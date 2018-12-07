@@ -1,4 +1,3 @@
-# encrypt
 Easy way to use data encryption in php
 ======================================
 
