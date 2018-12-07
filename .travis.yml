@@ -12,3 +12,7 @@ install:
 
 script:
   - vendor/bin/phpunit -v
+
+after_success:
+  - export CODECOV_TOKEN="a452e120-6ee3-4d5e-898f-08bfd346d38d"
+  - bash <(curl -s https://codecov.io/bash) || echo 'Codecov failed to upload'
