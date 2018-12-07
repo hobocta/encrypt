@@ -10,8 +10,8 @@ php:
 #  - hhvm # on Trusty only
 #  - nightly
 
-#install:
-#  - composer install
+install:
+  - composer install
 
 before_script:
 #  - curl -sSfL -o ~/.phpenv/versions/5.3/bin/phpunit https://phar.phpunit.de/phpunit-4.phar
