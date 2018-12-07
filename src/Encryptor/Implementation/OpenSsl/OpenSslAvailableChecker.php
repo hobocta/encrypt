@@ -4,7 +4,7 @@ namespace Hobocta\Encrypt\Encryptor\Implementation\OpenSsl;
 
 use Hobocta\Encrypt\Encryptor\Checker\AvailableCheckerInterface;
 
-class OpenSslAvailableChecker implements AvailableCheckerInterface
+final class OpenSslAvailableChecker implements AvailableCheckerInterface
 {
     public static function isAvailable()
     {

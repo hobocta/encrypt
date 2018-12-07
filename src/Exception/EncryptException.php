@@ -2,6 +2,6 @@
 
 namespace Hobocta\Encrypt\Exception;
 
-class EncryptException extends \Exception
+final class EncryptException extends \Exception
 {
 }

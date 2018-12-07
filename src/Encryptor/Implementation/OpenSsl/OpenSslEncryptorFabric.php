@@ -6,7 +6,7 @@ use Hobocta\Encrypt\Encryptor\Fabric\AbstractEncryptorFabric;
 use Hobocta\Encrypt\Encryptor\Fabric\EncryptorFabricInterface;
 use Hobocta\Encrypt\Exception\EncryptException;
 
-class OpenSslEncryptorFabric extends AbstractEncryptorFabric implements EncryptorFabricInterface
+final class OpenSslEncryptorFabric extends AbstractEncryptorFabric implements EncryptorFabricInterface
 {
     /**
      * @return OpenSslEncryptor

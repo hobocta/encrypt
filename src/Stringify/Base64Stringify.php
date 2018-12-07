@@ -2,7 +2,7 @@
 
 namespace Hobocta\Encrypt\Stringify;
 
-class Base64Stringify implements StringifyInterface
+final class Base64Stringify implements StringifyInterface
 {
     public function toString($data)
     {

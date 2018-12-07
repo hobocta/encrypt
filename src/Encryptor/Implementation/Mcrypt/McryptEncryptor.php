@@ -5,7 +5,7 @@ namespace Hobocta\Encrypt\Encryptor\Implementation\Mcrypt;
 use Hobocta\Encrypt\Encryptor\AbstractEncryptor;
 use Hobocta\Encrypt\Encryptor\EncryptorInterface;
 
-class McryptEncryptor extends AbstractEncryptor implements EncryptorInterface
+final class McryptEncryptor extends AbstractEncryptor implements EncryptorInterface
 {
     public function encrypt($data)
     {

@@ -4,7 +4,7 @@ namespace Hobocta\Encrypt\Encryptor\Implementation\Mcrypt;
 
 use Hobocta\Encrypt\Encryptor\Checker\AvailableCheckerInterface;
 
-class McryptAvailableChecker implements AvailableCheckerInterface
+final class McryptAvailableChecker implements AvailableCheckerInterface
 {
     public static function isAvailable()
     {

@@ -2,7 +2,7 @@
 
 namespace Hobocta\Encrypt\Stringify;
 
-class NoneStringify implements StringifyInterface
+final class NoneStringify implements StringifyInterface
 {
     public function toString($data)
     {

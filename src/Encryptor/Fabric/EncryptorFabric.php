@@ -9,7 +9,7 @@ use Hobocta\Encrypt\Encryptor\Implementation\OpenSsl\OpenSslAvailableChecker;
 use Hobocta\Encrypt\Encryptor\Implementation\OpenSsl\OpenSslEncryptorFabric;
 use Hobocta\Encrypt\Exception\EncryptException;
 
-class EncryptorFabric extends AbstractEncryptorFabric implements EncryptorFabricInterface
+final class EncryptorFabric extends AbstractEncryptorFabric implements EncryptorFabricInterface
 {
     private $fabric;
 

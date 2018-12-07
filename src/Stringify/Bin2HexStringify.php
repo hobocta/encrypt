@@ -2,7 +2,7 @@
 
 namespace Hobocta\Encrypt\Stringify;
 
-class Bin2HexStringify implements StringifyInterface
+final class Bin2HexStringify implements StringifyInterface
 {
     public function toString($data)
     {

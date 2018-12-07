@@ -6,7 +6,7 @@ use Hobocta\Encrypt\Encryptor\AbstractEncryptor;
 use Hobocta\Encrypt\Encryptor\EncryptorInterface;
 use Hobocta\Encrypt\Exception\EncryptException;
 
-class OpenSslEncryptor extends AbstractEncryptor implements EncryptorInterface
+final class OpenSslEncryptor extends AbstractEncryptor implements EncryptorInterface
 {
     /**
      * OpenSslEncryptor constructor.

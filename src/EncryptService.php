@@ -5,7 +5,7 @@ namespace Hobocta\Encrypt;
 use Hobocta\Encrypt\Encryptor\EncryptorInterface;
 use Hobocta\Encrypt\Stringify\StringifyInterface;
 
-class EncryptService
+final class EncryptService
 {
     /**
      * @var EncryptorInterface
