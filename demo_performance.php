@@ -9,19 +9,18 @@ require __DIR__ . '/vendor/autoload.php';
 $password = '1234';
 $data = 'My secret data!';
 
-// see more algorithms: hash_algos()
-$key = hash('sha1', $password);
-
 try {
-    $fabric = new EncryptorFabric($key);
+    $key = hash('sha1', $password);
+
+    $encryptorFabric = new EncryptorFabric($key);
 } catch (Exception $e) {
     die(sprintf('Exception message: %s (%s:%s)', $e->getMessage(), $e->getFile(), $e->getLine()) . PHP_EOL);
 }
 
 $encryptors = array(
-    '128 bit' => $fabric->createEncryptor128(),
-    '192 bit' => $fabric->createEncryptor192(),
-    '256 bit' => $fabric->createEncryptor256(),
+    '128 bit' => $encryptorFabric->createEncryptor128(),
+    '192 bit' => $encryptorFabric->createEncryptor192(),
+    '256 bit' => $encryptorFabric->createEncryptor256(),
 );
 
 $count = 10000;

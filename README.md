@@ -11,4 +11,7 @@ See [demo.php](demo.php)
 `php demo.php`
 
 ## Run performance test
-`php performance_test.php`
+`php demo_performance.php`
+
+## Run unit tests
+`phpunit`
