@@ -4,9 +4,22 @@ namespace Hobocta\Encrypt\Encryptor\Implementation\OpenSsl;
 
 use Hobocta\Encrypt\Encryptor\AbstractEncryptor;
 use Hobocta\Encrypt\Encryptor\EncryptorInterface;
+use Hobocta\Encrypt\Exception\EncryptException;
 
 class OpenSslEncryptor extends AbstractEncryptor implements EncryptorInterface
 {
+    /**
+     * OpenSslEncryptor constructor.
+     * @param $key
+     * @param array $options
+     * @throws EncryptException
+     */
+    public function __construct($key, array $options)
+    {
+        parent::__construct($key, $options);
+
+        $this->validateOptions();
+    }
     public function encrypt($data)
     {
         $iv = $this->getIv();
@@ -58,5 +71,22 @@ class OpenSslEncryptor extends AbstractEncryptor implements EncryptorInterface
     protected function getBinaryEncoding()
     {
         return '8bit';
+    }
+
+    /**
+     * @throws EncryptException
+     */
+    protected function validateOptions()
+    {
+        foreach (array('method', 'options') as $option) {
+            if (!isset($this->options[$option])) {
+                throw new EncryptException(sprintf('Option "%s" is not set', $option));
+            }
+        }
+    }
+
+    protected function getOptionKeys()
+    {
+        return array('method', 'options');
     }
 }

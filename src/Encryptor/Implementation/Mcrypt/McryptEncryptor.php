@@ -71,4 +71,9 @@ class McryptEncryptor extends AbstractEncryptor implements EncryptorInterface
     {
         return 'iso-8859-1';
     }
+
+    protected function getOptionKeys()
+    {
+        return array('cipher', 'mode', 'ivSource');
+    }
 }

@@ -4,9 +4,14 @@ namespace Hobocta\Encrypt\Encryptor\Implementation\Mcrypt;
 
 use Hobocta\Encrypt\Encryptor\Fabric\AbstractEncryptorFabric;
 use Hobocta\Encrypt\Encryptor\Fabric\EncryptorFabricInterface;
+use Hobocta\Encrypt\Exception\EncryptException;
 
 class McryptEncryptorFabric extends AbstractEncryptorFabric implements EncryptorFabricInterface
 {
+    /**
+     * @return McryptEncryptor
+     * @throws EncryptException
+     */
     public function createEncryptor128()
     {
         $cipher = MCRYPT_RIJNDAEL_128;
@@ -25,6 +30,10 @@ class McryptEncryptorFabric extends AbstractEncryptorFabric implements Encryptor
         );
     }
 
+    /**
+     * @return McryptEncryptor
+     * @throws EncryptException
+     */
     public function createEncryptor192()
     {
         $cipher = MCRYPT_RIJNDAEL_192;
@@ -43,6 +52,10 @@ class McryptEncryptorFabric extends AbstractEncryptorFabric implements Encryptor
         );
     }
 
+    /**
+     * @return McryptEncryptor
+     * @throws EncryptException
+     */
     public function createEncryptor256()
     {
         $cipher = MCRYPT_RIJNDAEL_256;

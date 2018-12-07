@@ -4,9 +4,14 @@ namespace Hobocta\Encrypt\Encryptor\Implementation\OpenSsl;
 
 use Hobocta\Encrypt\Encryptor\Fabric\AbstractEncryptorFabric;
 use Hobocta\Encrypt\Encryptor\Fabric\EncryptorFabricInterface;
+use Hobocta\Encrypt\Exception\EncryptException;
 
 class OpenSslEncryptorFabric extends AbstractEncryptorFabric implements EncryptorFabricInterface
 {
+    /**
+     * @return OpenSslEncryptor
+     * @throws EncryptException
+     */
     public function createEncryptor128()
     {
         return new OpenSslEncryptor(
@@ -18,6 +23,10 @@ class OpenSslEncryptorFabric extends AbstractEncryptorFabric implements Encrypto
         );
     }
 
+    /**
+     * @return OpenSslEncryptor
+     * @throws EncryptException
+     */
     public function createEncryptor192()
     {
         return new OpenSslEncryptor(
@@ -29,6 +38,10 @@ class OpenSslEncryptorFabric extends AbstractEncryptorFabric implements Encrypto
         );
     }
 
+    /**
+     * @return OpenSslEncryptor
+     * @throws EncryptException
+     */
     public function createEncryptor256()
     {
         return new OpenSslEncryptor(

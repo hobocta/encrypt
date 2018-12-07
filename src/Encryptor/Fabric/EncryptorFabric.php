@@ -3,9 +3,11 @@
 namespace Hobocta\Encrypt\Encryptor\Fabric;
 
 use Hobocta\Encrypt\Encryptor\Implementation\Mcrypt\McryptAvailableChecker;
+use Hobocta\Encrypt\Encryptor\Implementation\Mcrypt\McryptEncryptor;
 use Hobocta\Encrypt\Encryptor\Implementation\Mcrypt\McryptEncryptorFabric;
 use Hobocta\Encrypt\Encryptor\Implementation\OpenSsl\OpenSslAvailableChecker;
 use Hobocta\Encrypt\Encryptor\Implementation\OpenSsl\OpenSslEncryptorFabric;
+use Hobocta\Encrypt\Exception\EncryptException;
 
 class EncryptorFabric extends AbstractEncryptorFabric implements EncryptorFabricInterface
 {
@@ -14,7 +16,7 @@ class EncryptorFabric extends AbstractEncryptorFabric implements EncryptorFabric
     /**
      * EncryptorFabric constructor.
      * @param $key
-     * @throws \Exception
+     * @throws EncryptException
      */
     public function __construct($key)
     {
@@ -25,20 +27,32 @@ class EncryptorFabric extends AbstractEncryptorFabric implements EncryptorFabric
         } elseif (McryptAvailableChecker::isAvailable()) {
             $this->fabric = new McryptEncryptorFabric($this->key);
         } else {
-            throw new \Exception('Not found available encryptor');
+            throw new EncryptException('Not found available encryptor');
         }
     }
 
+    /**
+     * @return McryptEncryptor
+     * @throws EncryptException
+     */
     public function createEncryptor128()
     {
         return $this->fabric->createEncryptor128();
     }
 
+    /**
+     * @return McryptEncryptor
+     * @throws EncryptException
+     */
     public function createEncryptor192()
     {
         return $this->fabric->createEncryptor192();
     }
 
+    /**
+     * @return McryptEncryptor
+     * @throws EncryptException
+     */
     public function createEncryptor256()
     {
         return $this->fabric->createEncryptor256();

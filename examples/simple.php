@@ -2,6 +2,7 @@
 
 use Hobocta\Encrypt\Encryptor\Fabric\EncryptorFabric;
 use Hobocta\Encrypt\EncryptService;
+use Hobocta\Encrypt\Exception\EncryptException;
 use Hobocta\Encrypt\Stringify\Base64Stringify;
 
 require __DIR__ . '/../vendor/autoload.php';
@@ -15,7 +16,7 @@ try {
     $encryptorFabric = new EncryptorFabric($key);
 
     $encryptService = new EncryptService($encryptorFabric->createEncryptor128(), new Base64Stringify());
-} catch (Exception $e) {
+} catch (EncryptException $e) {
     die(sprintf('Exception message: %s (%s:%s)', $e->getMessage(), $e->getFile(), $e->getLine()) . PHP_EOL);
 }
 
