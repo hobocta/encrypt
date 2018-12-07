@@ -4,7 +4,7 @@ use Hobocta\Encrypt\Encryptor\Fabric\EncryptorFabric;
 use Hobocta\Encrypt\EncryptService;
 use Hobocta\Encrypt\Stringify\Base64Stringify;
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $password = '1234';
 $data = 'My secret data!';
