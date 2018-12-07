@@ -63,4 +63,11 @@ final class EncryptServiceTest extends TestCase
             }
         }
     }
+
+    public function testAvailable()
+    {
+        if (!OpenSslAvailableChecker::isAvailable() && !McryptAvailableChecker::isAvailable()) {
+            $this->fail('OpenSSL and Mcrypt are not available both');
+        }
+    }
 }
