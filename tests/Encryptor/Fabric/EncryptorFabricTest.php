@@ -8,12 +8,13 @@ class EncryptorFabricTest extends TestCase
     public function testInstanceOf()
     {
         /** @noinspection PhpUnhandledExceptionInspection */
-        $fabric = new EncryptorFabric('');
+        $encryptorFabric = new EncryptorFabric('');
 
-        $this->assertInstanceOf('\Hobocta\Encrypt\Encryptor\Fabric\EncryptorFabricInterface', $fabric);
+        $this->assertInstanceOf('\Hobocta\Encrypt\Encryptor\Fabric\EncryptorFabricInterface', $encryptorFabric);
+        $this->assertInstanceOf('\Hobocta\Encrypt\Encryptor\Fabric\AbstractEncryptorFabric', $encryptorFabric);
 
-        $this->assertInstanceOf('\Hobocta\Encrypt\Encryptor\EncryptorInterface', $fabric->createEncryptor128());
-        $this->assertInstanceOf('\Hobocta\Encrypt\Encryptor\EncryptorInterface', $fabric->createEncryptor192());
-        $this->assertInstanceOf('\Hobocta\Encrypt\Encryptor\EncryptorInterface', $fabric->createEncryptor256());
+        $this->assertInstanceOf('\Hobocta\Encrypt\Encryptor\EncryptorInterface', $encryptorFabric->createEncryptor128());
+        $this->assertInstanceOf('\Hobocta\Encrypt\Encryptor\EncryptorInterface', $encryptorFabric->createEncryptor192());
+        $this->assertInstanceOf('\Hobocta\Encrypt\Encryptor\EncryptorInterface', $encryptorFabric->createEncryptor256());
     }
 }

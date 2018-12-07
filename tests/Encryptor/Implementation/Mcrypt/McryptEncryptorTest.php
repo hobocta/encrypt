@@ -1,15 +1,15 @@
 <?php
 
-use Hobocta\Encrypt\Encryptor\EncryptorAvailableChecker;
-use Hobocta\Encrypt\Encryptor\Fabric\McryptEncryptorFabric;
-use Hobocta\Encrypt\Encryptor\McryptEncryptor;
+use Hobocta\Encrypt\Encryptor\Implementation\Mcrypt\McryptAvailableChecker;
+use Hobocta\Encrypt\Encryptor\Implementation\Mcrypt\McryptEncryptor;
+use Hobocta\Encrypt\Encryptor\Implementation\Mcrypt\McryptEncryptorFabric;
 use PHPUnit\Framework\TestCase;
 
 final class McryptEncryptorTest extends TestCase
 {
     public function testInstanceOf()
     {
-        if (!EncryptorAvailableChecker::isMcryptAvailable()) {
+        if (!McryptAvailableChecker::isAvailable()) {
             $this->assertEmpty('');
             return;
         }
@@ -20,20 +20,20 @@ final class McryptEncryptorTest extends TestCase
 
     public function testEncryptAndDecrypt()
     {
-        if (!EncryptorAvailableChecker::isMcryptAvailable()) {
+        if (!McryptAvailableChecker::isAvailable()) {
             $this->assertEmpty('');
             return;
         }
 
         $key = hash('sha1', uniqid(true));
 
-        $fabric = new McryptEncryptorFabric($key);
+        $encryptorFabric = new McryptEncryptorFabric($key);
 
         foreach (
             array(
-                $fabric->createEncryptor128(),
-                $fabric->createEncryptor192(),
-                $fabric->createEncryptor256(),
+                $encryptorFabric->createEncryptor128(),
+                $encryptorFabric->createEncryptor192(),
+                $encryptorFabric->createEncryptor256(),
             ) as $encryptor
         ) {
             $data = uniqid(true);

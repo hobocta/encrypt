@@ -1,6 +1,9 @@
 <?php
 
-namespace Hobocta\Encrypt\Encryptor;
+namespace Hobocta\Encrypt\Encryptor\Implementation\Mcrypt;
+
+use Hobocta\Encrypt\Encryptor\AbstractEncryptor;
+use Hobocta\Encrypt\Encryptor\EncryptorInterface;
 
 class McryptEncryptor extends AbstractEncryptor implements EncryptorInterface
 {

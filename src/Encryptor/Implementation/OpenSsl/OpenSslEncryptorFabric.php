@@ -1,10 +1,11 @@
 <?php
 
-namespace Hobocta\Encrypt\Encryptor\Fabric;
+namespace Hobocta\Encrypt\Encryptor\Implementation\OpenSsl;
 
-use Hobocta\Encrypt\Encryptor\OpenSslEncryptor;
+use Hobocta\Encrypt\Encryptor\Fabric\AbstractEncryptorFabric;
+use Hobocta\Encrypt\Encryptor\Fabric\EncryptorFabricInterface;
 
-class OpenSslEncryptorFabric extends AbstractEncryptorFabric
+class OpenSslEncryptorFabric extends AbstractEncryptorFabric implements EncryptorFabricInterface
 {
     public function createEncryptor128()
     {

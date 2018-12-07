@@ -2,9 +2,12 @@
 
 namespace Hobocta\Encrypt\Encryptor\Fabric;
 
-use Hobocta\Encrypt\Encryptor\EncryptorAvailableChecker;
+use Hobocta\Encrypt\Encryptor\Implementation\Mcrypt\McryptAvailableChecker;
+use Hobocta\Encrypt\Encryptor\Implementation\Mcrypt\McryptEncryptorFabric;
+use Hobocta\Encrypt\Encryptor\Implementation\OpenSsl\OpenSslAvailableChecker;
+use Hobocta\Encrypt\Encryptor\Implementation\OpenSsl\OpenSslEncryptorFabric;
 
-class EncryptorFabric implements EncryptorFabricInterface
+class EncryptorFabric extends AbstractEncryptorFabric implements EncryptorFabricInterface
 {
     private $fabric;
 
@@ -15,10 +18,12 @@ class EncryptorFabric implements EncryptorFabricInterface
      */
     public function __construct($key)
     {
-        if (EncryptorAvailableChecker::isOpenSSLAvailable()) {
-            $this->fabric = new OpenSslEncryptorFabric($key);
-        } elseif (EncryptorAvailableChecker::isMcryptAvailable()) {
-            $this->fabric = new McryptEncryptorFabric($key);
+        parent::__construct($key);
+
+        if (OpenSslAvailableChecker::isAvailable()) {
+            $this->fabric = new OpenSslEncryptorFabric($this->key);
+        } elseif (McryptAvailableChecker::isAvailable()) {
+            $this->fabric = new McryptEncryptorFabric($this->key);
         } else {
             throw new \Exception('Not found available encryptor');
         }

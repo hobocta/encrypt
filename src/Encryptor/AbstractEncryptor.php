@@ -2,7 +2,7 @@
 
 namespace Hobocta\Encrypt\Encryptor;
 
-abstract class AbstractEncryptor
+abstract class AbstractEncryptor implements EncryptorInterface
 {
     protected $key;
     protected $options;

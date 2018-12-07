@@ -1,15 +1,15 @@
 <?php
 
-use Hobocta\Encrypt\Encryptor\EncryptorAvailableChecker;
-use Hobocta\Encrypt\Encryptor\Fabric\OpenSslEncryptorFabric;
-use Hobocta\Encrypt\Encryptor\OpenSslEncryptor;
+use Hobocta\Encrypt\Encryptor\Implementation\OpenSsl\OpenSslAvailableChecker;
+use Hobocta\Encrypt\Encryptor\Implementation\OpenSsl\OpenSslEncryptor;
+use Hobocta\Encrypt\Encryptor\Implementation\OpenSsl\OpenSslEncryptorFabric;
 use PHPUnit\Framework\TestCase;
 
 final class OpenSslEncryptorTest extends TestCase
 {
     public function testInstanceOf()
     {
-        if (!EncryptorAvailableChecker::isOpenSSLAvailable()) {
+        if (!OpenSslAvailableChecker::isAvailable()) {
             $this->assertEmpty('');
             return;
         }
@@ -26,20 +26,20 @@ final class OpenSslEncryptorTest extends TestCase
 
     public function testEncryptAndDecrypt()
     {
-        if (!EncryptorAvailableChecker::isOpenSSLAvailable()) {
+        if (!OpenSslAvailableChecker::isAvailable()) {
             $this->assertEmpty('');
             return;
         }
 
         $key = hash('sha1', uniqid(true));
 
-        $fabric = new OpenSslEncryptorFabric($key);
+        $encryptorFabric = new OpenSslEncryptorFabric($key);
 
         foreach (
             array(
-                $fabric->createEncryptor128(),
-                $fabric->createEncryptor192(),
-                $fabric->createEncryptor256(),
+                $encryptorFabric->createEncryptor128(),
+                $encryptorFabric->createEncryptor192(),
+                $encryptorFabric->createEncryptor256(),
             ) as $encryptor
         ) {
             $data = uniqid(true);

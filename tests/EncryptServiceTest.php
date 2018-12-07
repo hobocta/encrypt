@@ -1,8 +1,9 @@
 <?php
 
-use Hobocta\Encrypt\Encryptor\EncryptorAvailableChecker;
-use Hobocta\Encrypt\Encryptor\Fabric\McryptEncryptorFabric;
-use Hobocta\Encrypt\Encryptor\Fabric\OpenSslEncryptorFabric;
+use Hobocta\Encrypt\Encryptor\Implementation\Mcrypt\McryptAvailableChecker;
+use Hobocta\Encrypt\Encryptor\Implementation\Mcrypt\McryptEncryptorFabric;
+use Hobocta\Encrypt\Encryptor\Implementation\OpenSsl\OpenSslAvailableChecker;
+use Hobocta\Encrypt\Encryptor\Implementation\OpenSsl\OpenSslEncryptorFabric;
 use Hobocta\Encrypt\EncryptService;
 use Hobocta\Encrypt\Stringify\Base64Stringify;
 use Hobocta\Encrypt\Stringify\Bin2HexStringify;
@@ -15,20 +16,20 @@ final class EncryptServiceTest extends TestCase
     {
         $key = hash('sha1', uniqid(true));
 
-        if (EncryptorAvailableChecker::isOpenSSLAvailable()) {
-            $fabric = new OpenSslEncryptorFabric($key);
-        } elseif (EncryptorAvailableChecker::isMcryptAvailable()) {
-            $fabric = new McryptEncryptorFabric($key);
+        if (OpenSslAvailableChecker::isAvailable()) {
+            $encryptorFabric = new OpenSslEncryptorFabric($key);
+        } elseif (McryptAvailableChecker::isAvailable()) {
+            $encryptorFabric = new McryptEncryptorFabric($key);
         }
 
         /** @noinspection PhpUndefinedVariableInspection */
-        $this->assertInstanceOf('\Hobocta\Encrypt\Encryptor\Fabric\EncryptorFabricInterface', $fabric);
+        $this->assertInstanceOf('\Hobocta\Encrypt\Encryptor\Fabric\EncryptorFabricInterface', $encryptorFabric);
 
         foreach (
             array(
-                $fabric->createEncryptor128(),
-                $fabric->createEncryptor192(),
-                $fabric->createEncryptor256(),
+                $encryptorFabric->createEncryptor128(),
+                $encryptorFabric->createEncryptor192(),
+                $encryptorFabric->createEncryptor256(),
             ) as $encryptor
         ) {
             foreach (

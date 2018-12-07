@@ -1,6 +1,9 @@
 <?php
 
-namespace Hobocta\Encrypt\Encryptor;
+namespace Hobocta\Encrypt\Encryptor\Implementation\OpenSsl;
+
+use Hobocta\Encrypt\Encryptor\AbstractEncryptor;
+use Hobocta\Encrypt\Encryptor\EncryptorInterface;
 
 class OpenSslEncryptor extends AbstractEncryptor implements EncryptorInterface
 {
