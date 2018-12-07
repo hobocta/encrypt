@@ -5,14 +5,17 @@ Easy way to use data encryption in php
 `composer require hobocta/encrypt`
 
 ## Usage
-See [demo/demo.php](demo/demo.php)
+See [examples/demo.php](examples/demo.php)
 
-## Run test
-`php demo/demo.php`
-`php demo/demo_all.php`
+## Run simple example
+`php examples/simple.php`
 
-## Run performance test
-`php demo/demo_performance.php`
+## Run example with all variants
+
+`php examples/all.php`
+
+## Run performance test for all variants
+`php examples/performance.php`
 
 ## Run unit tests
 `phpunit`
