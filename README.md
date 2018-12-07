@@ -9,6 +9,7 @@ See [demo.php](demo.php)
 
 ## Run test
 `php demo.php`
+`php demo_all.php`
 
 ## Run performance test
 `php demo_performance.php`
