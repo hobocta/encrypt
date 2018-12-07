@@ -24,8 +24,8 @@ before_script:
   - wget -O ~/.phpenv/versions/7.0/bin/phpunit https://phar.phpunit.de/phpunit-6.phar
   - wget -O ~/.phpenv/versions/7.1/bin/phpunit https://phar.phpunit.de/phpunit-7.phar
   - cp ~/.phpenv/versions/7.1/bin/phpunit ~/.phpenv/versions/7.2/bin/phpunit
+  - cp ~/.phpenv/versions/7.1/bin/phpunit ~/.phpenv/versions/hhvm/bin/phpunit
   - cp ~/.phpenv/versions/7.1/bin/phpunit ~/.phpenv/versions/nightly/bin/phpunit
-  - cp ~/.phpenv/versions/7.1/bin/phpunit ~/.phpenv/hhvm/nightly/bin/phpunit
 
 script:
   - phpunit
