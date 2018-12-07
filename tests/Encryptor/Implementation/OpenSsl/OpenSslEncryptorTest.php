@@ -68,4 +68,42 @@ final class OpenSslEncryptorTest extends TestCase
             $this->assertEquals($data, $decrypted);
         }
     }
+
+    public function testValidate()
+    {
+        foreach (
+            array(
+                array(
+                    '',
+                    array(
+                        'method' => uniqid(true),
+                        'options' => uniqid(true),
+                    ),
+                ),
+                array(
+                    uniqid(true),
+                    array(),
+                ),
+                array(
+                    uniqid(true),
+                    array(
+                        'method' => uniqid(true),
+                    )
+                ),
+                array(
+                    uniqid(true),
+                    array(
+                        'options' => uniqid(true),
+                    )
+                ),
+            ) as $arguments
+        ) {
+            try {
+                new OpenSslEncryptor($arguments[0], $arguments[1]);
+
+                $this->fail('Expected exception not thrown');
+            } catch (EncryptException $e) {
+            }
+        }
+    }
 }

@@ -41,4 +41,16 @@ final class McryptEncryptorFabricTest extends TestCase
             $encryptorFabric->createEncryptor256()
         );
     }
+
+    public function testValidate()
+    {
+        foreach (array('', 1, array()) as $argument) {
+            try {
+                new McryptEncryptorFabric($argument);
+
+                $this->fail('Expected exception not thrown');
+            } catch (EncryptException $e) {
+            }
+        }
+    }
 }

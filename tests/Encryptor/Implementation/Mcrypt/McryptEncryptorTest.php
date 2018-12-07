@@ -70,4 +70,52 @@ final class McryptEncryptorTest extends TestCase
             $this->assertEquals($data, $decrypted);
         }
     }
+
+    public function testValidate()
+    {
+        foreach (
+            array(
+                array(
+                    '',
+                    array(
+                        'cipher' => uniqid(true),
+                        'mode' => uniqid(true),
+                        'ivSource' => uniqid(true)
+                    ),
+                ),
+                array(
+                    uniqid(true),
+                    array(),
+                ),
+                array(
+                    uniqid(true),
+                    array(
+                        'mode' => uniqid(true),
+                        'ivSource' => uniqid(true)
+                    )
+                ),
+                array(
+                    uniqid(true),
+                    array(
+                        'cipher' => uniqid(true),
+                        'ivSource' => uniqid(true)
+                    )
+                ),
+                array(
+                    uniqid(true),
+                    array(
+                        'cipher' => uniqid(true),
+                        'mode' => uniqid(true),
+                    )
+                ),
+            ) as $arguments
+        ) {
+            try {
+                new McryptEncryptor($arguments[0], $arguments[1]);
+
+                $this->fail('Expected exception not thrown');
+            } catch (EncryptException $e) {
+            }
+        }
+    }
 }
