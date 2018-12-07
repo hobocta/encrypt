@@ -55,5 +55,7 @@ class EncryptorFabricTest extends TestCase
             $this->fail('Expected exception not thrown');
         } catch (EncryptException $e) {
         }
+
+        $this->assertTrue(true);
     }
 }

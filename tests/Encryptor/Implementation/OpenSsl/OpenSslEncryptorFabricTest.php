@@ -52,5 +52,7 @@ final class OpenSslEncryptorFabricTest extends TestCase
             } catch (EncryptException $e) {
             }
         }
+
+        $this->assertTrue(true);
     }
 }

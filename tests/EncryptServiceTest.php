@@ -23,11 +23,11 @@ final class EncryptServiceTest extends TestCase
         $encryptorFabrics = array();
 
         if (OpenSslAvailableChecker::isAvailable()) {
-            $encryptorFabrics = new OpenSslEncryptorFabric($key);
+            $encryptorFabrics[] = new OpenSslEncryptorFabric($key);
         }
 
         if (McryptAvailableChecker::isAvailable()) {
-            $encryptorFabrics =  new McryptEncryptorFabric($key);
+            $encryptorFabrics[] =  new McryptEncryptorFabric($key);
         }
 
         foreach ($encryptorFabrics as $encryptorFabric) {
@@ -68,6 +68,8 @@ final class EncryptServiceTest extends TestCase
     {
         if (!OpenSslAvailableChecker::isAvailable() && !McryptAvailableChecker::isAvailable()) {
             $this->fail('OpenSSL and Mcrypt are not available both');
+        } else {
+            $this->assertTrue(true);
         }
     }
 }

@@ -117,5 +117,7 @@ final class McryptEncryptorTest extends TestCase
             } catch (EncryptException $e) {
             }
         }
+
+        $this->assertTrue(true);
     }
 }

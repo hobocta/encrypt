@@ -52,5 +52,7 @@ final class McryptEncryptorFabricTest extends TestCase
             } catch (EncryptException $e) {
             }
         }
+
+        $this->assertTrue(true);
     }
 }

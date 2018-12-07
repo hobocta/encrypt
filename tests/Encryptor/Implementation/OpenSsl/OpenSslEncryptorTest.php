@@ -105,5 +105,7 @@ final class OpenSslEncryptorTest extends TestCase
             } catch (EncryptException $e) {
             }
         }
+
+        $this->assertTrue(true);
     }
 }
