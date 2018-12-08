@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
+
+/f/OSPanel/modules/php/PHP-5.3/php.exe ~/bin/composer.phar remove --dev phpunit/phpunit && \
 /f/OSPanel/modules/php/PHP-5.3/php.exe ~/bin/phpunit-4.8.36.phar -v && \
 /f/OSPanel/modules/php/PHP-5.4/php.exe ~/bin/phpunit-4.8.36.phar -v && \
 /f/OSPanel/modules/php/PHP-5.5/php.exe ~/bin/phpunit-4.8.36.phar -v && \
 /f/OSPanel/modules/php/PHP-5.5-x64/php.exe ~/bin/phpunit-4.8.36.phar -v && \
+/f/OSPanel/modules/php/PHP-5.6-x64/php.exe ~/bin/composer.phar require --dev phpunit/phpunit && \
 /f/OSPanel/modules/php/PHP-5.6/php.exe ~/bin/phpunit-5.7.27.phar -v && \
 /f/OSPanel/modules/php/PHP-5.6-x64/php.exe ~/bin/phpunit-5.7.27.phar -v && \
 /f/OSPanel/modules/php/PHP-7.0/php.exe ~/bin/phpunit-6.5.13.phar -v && \
