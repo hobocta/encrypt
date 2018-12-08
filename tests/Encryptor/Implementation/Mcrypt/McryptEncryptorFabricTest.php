@@ -17,8 +17,8 @@ final class McryptEncryptorFabricTest extends TestCase
             return;
         }
 
-        /** @noinspection PhpUnhandledExceptionInspection */
         $encryptorFabric = new McryptEncryptorFabric(uniqid(true));
+
         $this->assertInstanceOf(
             '\Hobocta\Encrypt\Encryptor\Fabric\AbstractEncryptorFabric',
             $encryptorFabric

@@ -16,15 +16,17 @@ final class EncryptorFabric extends AbstractEncryptorFabric implements Encryptor
     /**
      * EncryptorFabric constructor.
      * @param $key
+     * @param bool $disableOpenSsl
+     * @param bool $disableMcrypt
      * @throws EncryptException
      */
-    public function __construct($key)
+    public function __construct($key, $disableOpenSsl = false, $disableMcrypt = false)
     {
         parent::__construct($key);
 
-        if (OpenSslAvailableChecker::isAvailable()) {
+        if (!$disableOpenSsl && OpenSslAvailableChecker::isAvailable()) {
             $this->fabric = new OpenSslEncryptorFabric($this->key);
-        } elseif (McryptAvailableChecker::isAvailable()) {
+        } elseif (!$disableMcrypt && McryptAvailableChecker::isAvailable()) {
             $this->fabric = new McryptEncryptorFabric($this->key);
         } else {
             throw new EncryptException('Not found available encryptor');
