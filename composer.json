@@ -3,7 +3,7 @@
     "license": "MIT",
     "homepage": "https://github.com/hobocta/encrypt",
     "description": "Easy way to use data encryption",
-    "keywords": ["encryption", "security", "cryptography", "crypto", "openssl", "aes"],
+    "keywords": ["encryption", "security", "cryptography", "crypto", "aes", "openssl", "mcrypt"],
     "authors": [{"name": "Anton Kondratov", "email": "contact@site-home.ru"}],
     "require": {
         "php" : "^5.3.3 || ^7.0"
