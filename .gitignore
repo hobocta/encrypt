@@ -3,4 +3,4 @@
 /composer.phar
 /phpunit*.phar
 /tests/coverage/
-/coverage_env.sh
+/tests/manual/env.sh
