@@ -13,10 +13,11 @@ php:
 
 before_script:
     - travis_retry composer install
-    - travis_retry composer require "phpunit/phpunit:<7" --no-interaction
+#    - travis_retry composer require "phpunit/phpunit:<7" --no-interaction
 
 script:
-  - vendor/bin/phpunit --coverage-clover=coverage.xml
+#  - vendor/bin/phpunit --coverage-clover=coverage.xml
+  - phpunit -v --coverage-clover=coverage.xml
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
