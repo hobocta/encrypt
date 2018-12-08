@@ -12,7 +12,7 @@ echo "require phpunit/phpunit" && \
 echo "remove phpunit/phpunit" && \
 /f/OSPanel/modules/php/PHP-7.2-x64/php.exe ~/bin/composer.phar remove phpunit/phpunit --no-interaction --dev -q && \
 echo "require phpunit/phpunit" && \
-/f/OSPanel/modules/php/PHP-7.2-x64/php.exe ~/bin/composer.phar require "phpunit/phpunit:>4,<6" --no-interaction --prefer-source --dev -q && \
+/f/OSPanel/modules/php/PHP-7.2-x64/php.exe ~/bin/composer.phar require "phpunit/phpunit:^5.7" --no-interaction --prefer-source --dev -q && \
 /f/OSPanel/modules/php/PHP-5.6/php.exe ~/bin/phpunit-5.7.27.phar -v && \
 /f/OSPanel/modules/php/PHP-5.6-x64/php.exe ~/bin/phpunit-5.7.27.phar -v && \
 /f/OSPanel/modules/php/PHP-7.0/php.exe ~/bin/phpunit-6.5.13.phar -v && \
