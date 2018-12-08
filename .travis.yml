@@ -10,6 +10,7 @@ php:
 
 before_script:
     - travis_retry composer install
+    - travis_retry composer require phpunit/phpunit
 
 script:
   - vendor/bin/phpunit --coverage-clover=coverage.xml
