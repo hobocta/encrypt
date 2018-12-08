@@ -1,6 +1,7 @@
 {
     "name": "hobocta/encrypt",
     "description": "Easy way to use data encryption",
+    "homepage": "https://github.com/hobocta/encrypt",
     "license": "MIT",
     "authors": [{"name": "Anton Kondratov", "email": "contact@site-home.ru"}],
     "require": {
