@@ -12,7 +12,7 @@ php:
 
 before_script:
     - travis_retry composer install
-    - travis_retry composer require phpunit/phpunit --no-interaction
+    - travis_retry composer require "phpunit/phpunit:<7" --no-interaction
 
 script:
   - vendor/bin/phpunit --coverage-clover=coverage.xml
