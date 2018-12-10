@@ -12,10 +12,25 @@ Easy way to use data encryption in php
 `composer require hobocta/encrypt`
 
 ## Usage
-See [examples/simple.php](examples/simple.php)
+```
+$data = 'My secret data!';
+
+$password = '1234';
+
+$encryptService = new EncryptService(
+	(new EncryptorFabric(sha1($password)))->createEncryptor128(),
+	new Base64Stringify()
+);
+
+$encrypted = $encryptService->encrypt($data); // 'fxVrDEtIb/krb8fHW6hhVDbH9VeV1Lwbs3hM35ITtc8='
+
+$decrypted = $encryptService->decrypt($encrypted); // 'My secret data!'
+```
 
 ## Run simple example
 `php examples/simple.php`
+
+See code [examples/simple.php](examples/simple.php)
 
 ## Run example with all variants
 
