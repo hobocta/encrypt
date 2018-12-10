@@ -8,7 +8,7 @@ use Hobocta\Encrypt\Stringify\Base64Stringify;
 require __DIR__ . '/../vendor/autoload.php';
 
 $data = 'My secret data!';
-$password cd te = '1234';
+$password = '1234';
 
 try {
     $key = hash('sha1', $password);
