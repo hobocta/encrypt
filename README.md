@@ -12,7 +12,7 @@ Easy way to use data encryption in php
 `composer require hobocta/encrypt`
 
 ## Usage
-```
+```php
 $data = 'My secret data!';
 
 $password = '1234';
