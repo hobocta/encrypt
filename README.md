@@ -13,13 +13,17 @@ Easy way to use data encryption in php
 
 ## Usage
 ```php
+use Hobocta\Encrypt\Encryptor\Fabric\EncryptorFabric;
+use Hobocta\Encrypt\EncryptService;
+use Hobocta\Encrypt\Stringify\Base64Stringify;
+
 $data = 'My secret data!';
 
 $password = '1234';
 
 $encryptService = new EncryptService(
-	(new EncryptorFabric(sha1($password)))->createEncryptor128(),
-	new Base64Stringify()
+    (new EncryptorFabric(sha1($password)))->createEncryptor128(),
+    new Base64Stringify()
 );
 
 $encrypted = $encryptService->encrypt($data); // 'fxVrDEtIb/krb8fHW6hhVDbH9VeV1Lwbs3hM35ITtc8='
