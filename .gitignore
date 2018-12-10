@@ -4,3 +4,4 @@
 /phpunit*.phar
 /tests/coverage/
 /tests/manual/env.sh
+/.php_cs.cache

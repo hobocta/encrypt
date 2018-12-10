@@ -28,14 +28,14 @@ final class EncryptService
         $this->stringify = $stringify;
     }
 
-    function encrypt($data)
+    public function encrypt($data)
     {
         $encrypted = $this->encryptor->encrypt($data);
 
         return $this->stringify->toString($encrypted);
     }
 
-    function decrypt($data)
+    public function decrypt($data)
     {
         $data = $this->stringify->fromString($data);
 
