@@ -28,9 +28,7 @@ $decrypted = $encryptService->decrypt($encrypted); // 'My secret data!'
 ```
 
 ## Run simple example
-`php examples/simple.php`
-
-See code [examples/simple.php](examples/simple.php)
+`php examples/simple.php` [code](examples/simple.php)
 
 ## Run example with all variants
 
