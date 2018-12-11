@@ -46,7 +46,7 @@ final class OpenSslEncryptorTest extends TestCase
             return;
         }
 
-        $key = hash('sha1', uniqid(true));
+        $key = sha1(uniqid(true));
 
         $encryptorFabric = new OpenSslEncryptorFabric($key);
 

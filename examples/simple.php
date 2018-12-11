@@ -12,7 +12,7 @@ $data = 'My secret data!';
 $password = '1234';
 
 try {
-    $key = hash('sha1', $password);
+    $key = sha1($password);
 
     $encryptorFabric = new EncryptorFabric($key);
 

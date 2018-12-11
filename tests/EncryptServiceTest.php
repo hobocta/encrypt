@@ -18,7 +18,7 @@ final class EncryptServiceTest extends TestCase
      */
     public function testConvert()
     {
-        $key = hash('sha1', uniqid(true));
+        $key = sha1(uniqid(true));
 
         $encryptorFabrics = array();
 

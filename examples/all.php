@@ -17,7 +17,7 @@ $password = '1234';
 $encryptorFabrics = array();
 
 try {
-    $key = hash('sha1', $password);
+    $key = sha1($password);
 
     if (OpenSslAvailableChecker::isAvailable()) {
         $encryptorFabrics['OpenSSL'] = new OpenSslEncryptorFabric($key);
