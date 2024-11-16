@@ -45,4 +45,7 @@ $decrypted = $encryptService->decrypt($encrypted); // 'My secret data!'
 `php examples/performance.php`
 
 ## Run unit tests
+
+Make sure to install PHPUnit separately before running the tests
+
 `phpunit`
