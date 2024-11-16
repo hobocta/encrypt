@@ -9,7 +9,7 @@ Easy way to use data encryption in php
 [![Downloads](https://img.shields.io/packagist/dt/hobocta/encrypt.svg)](https://packagist.org/packages/hobocta/encrypt)
 
 ## Requirements
-php `^5.3.3` or `^7.0` with extension OpenSSL or Mcrypt
+php `^5.3.3` or `^7.0` or `^8.0` with extension OpenSSL or Mcrypt
 
 ## Install
 `composer require hobocta/encrypt`
