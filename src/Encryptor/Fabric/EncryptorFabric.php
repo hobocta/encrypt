@@ -15,9 +15,11 @@ final class EncryptorFabric extends AbstractEncryptorFabric implements Encryptor
 
     /**
      * EncryptorFabric constructor.
+     *
      * @param $key
      * @param bool $disableOpenSsl
      * @param bool $disableMcrypt
+     *
      * @throws EncryptException
      */
     public function __construct($key, $disableOpenSsl = false, $disableMcrypt = false)

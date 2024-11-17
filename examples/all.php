@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection DuplicatedCode */
+
 use Hobocta\Encrypt\Encryptor\Implementation\Mcrypt\McryptAvailableChecker;
 use Hobocta\Encrypt\Encryptor\Implementation\Mcrypt\McryptEncryptorFabric;
 use Hobocta\Encrypt\Encryptor\Implementation\OpenSsl\OpenSslAvailableChecker;
@@ -34,11 +36,24 @@ foreach ($encryptorFabrics as $name => $encryptorFabric) {
     echo PHP_EOL;
     echo $name . ':' . PHP_EOL;
 
-    $encryptors = array(
-        '128 bit' => $encryptorFabric->createEncryptor128(),
-        '192 bit' => $encryptorFabric->createEncryptor192(),
-        '256 bit' => $encryptorFabric->createEncryptor256(),
-    );
+    try {
+        $encryptors = array(
+            '128 bit' => $encryptorFabric->createEncryptor128(),
+            '192 bit' => $encryptorFabric->createEncryptor192(),
+            '256 bit' => $encryptorFabric->createEncryptor256(),
+        );
+    } catch (EncryptException $e) {
+        echo sprintf(
+            '%s: %s at %s:%s%s',
+            get_class($e),
+            $e->getMessage(),
+            $e->getFile(),
+            $e->getLine(),
+            PHP_EOL
+        );
+
+        continue;
+    }
 
     foreach ($encryptors as $encryptorName => $encryptor) {
         echo PHP_EOL;

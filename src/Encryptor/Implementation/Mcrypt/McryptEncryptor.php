@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpComposerExtensionStubsInspection */
+
 namespace Hobocta\Encrypt\Encryptor\Implementation\Mcrypt;
 
 use Hobocta\Encrypt\Encryptor\AbstractEncryptor;
@@ -11,7 +13,6 @@ final class McryptEncryptor extends AbstractEncryptor implements EncryptorInterf
     {
         $iv = $this->getIv();
 
-        /** @noinspection PhpDeprecationInspection */
         $encrypted = mcrypt_encrypt(
             $this->options['cipher'],
             $this->key,
@@ -23,6 +24,18 @@ final class McryptEncryptor extends AbstractEncryptor implements EncryptorInterf
         return $iv . $encrypted;
     }
 
+    protected function getIv()
+    {
+        $ivSize = $this->getIvSize();
+
+        return mcrypt_create_iv($ivSize, $this->options['ivSource']);
+    }
+
+    protected function getIvSize()
+    {
+        return mcrypt_get_iv_size($this->options['cipher'], $this->options['mode']);
+    }
+
     public function decrypt($encrypted)
     {
         $ivSize = $this->getIvSize();
@@ -31,7 +44,6 @@ final class McryptEncryptor extends AbstractEncryptor implements EncryptorInterf
 
         $data = $this->getBinarySubstring($encrypted, $ivSize, $this->getBinaryLength($encrypted) - $ivSize);
 
-        /** @noinspection PhpDeprecationInspection */
         $decrypted = mcrypt_decrypt(
             $this->options['cipher'],
             $this->key,
@@ -40,25 +52,7 @@ final class McryptEncryptor extends AbstractEncryptor implements EncryptorInterf
             $iv
         );
 
-        $decrypted = rtrim($decrypted, "\0\4");
-
-        return $decrypted;
-    }
-
-    protected function getIvSize()
-    {
-        /** @noinspection PhpDeprecationInspection */
-        return mcrypt_get_iv_size($this->options['cipher'], $this->options['mode']);
-    }
-
-    protected function getIv()
-    {
-        $ivSize = $this->getIvSize();
-
-        /** @noinspection PhpDeprecationInspection */
-        $iv = mcrypt_create_iv($ivSize, $this->options['ivSource']);
-
-        return $iv;
+        return rtrim($decrypted, "\0\4");
     }
 
     /**

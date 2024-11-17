@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection DuplicatedCode */
+
 use Hobocta\Encrypt\Encryptor\Fabric\EncryptorFabric;
 use Hobocta\Encrypt\EncryptService;
 use Hobocta\Encrypt\Exception\EncryptException;
@@ -18,7 +20,14 @@ try {
 
     $encryptService = new EncryptService($encryptorFabric->createEncryptor128(), new Base64Stringify());
 } catch (EncryptException $e) {
-    die(sprintf('Exception message: %s (%s:%s)', $e->getMessage(), $e->getFile(), $e->getLine()) . PHP_EOL);
+    exit(sprintf(
+        '%s: %s at %s:%s%s',
+        get_class($e),
+        $e->getMessage(),
+        $e->getFile(),
+        $e->getLine(),
+        PHP_EOL
+    ));
 }
 
 echo 'Data: ' . var_export($data, true) . PHP_EOL;

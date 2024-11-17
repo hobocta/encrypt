@@ -19,6 +19,7 @@ final class EncryptService
 
     /**
      * EncryptService constructor.
+     *
      * @param EncryptorInterface $encryptor
      * @param StringifyInterface $stringify
      */

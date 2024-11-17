@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpComposerExtensionStubsInspection */
+
 namespace Hobocta\Encrypt\Encryptor\Implementation\Mcrypt;
 
 use Hobocta\Encrypt\Encryptor\Fabric\AbstractEncryptorFabric;
@@ -17,7 +19,6 @@ final class McryptEncryptorFabric extends AbstractEncryptorFabric implements Enc
         $cipher = MCRYPT_RIJNDAEL_128;
         $mode = MCRYPT_MODE_CBC;
 
-        /** @noinspection PhpDeprecationInspection */
         $key = substr($this->key, 0, mcrypt_get_key_size($cipher, $mode));
 
         return new McryptEncryptor(
@@ -39,7 +40,6 @@ final class McryptEncryptorFabric extends AbstractEncryptorFabric implements Enc
         $cipher = MCRYPT_RIJNDAEL_192;
         $mode = MCRYPT_MODE_CBC;
 
-        /** @noinspection PhpDeprecationInspection */
         $key = substr($this->key, 0, mcrypt_get_key_size($cipher, $mode));
 
         return new McryptEncryptor(
@@ -61,7 +61,6 @@ final class McryptEncryptorFabric extends AbstractEncryptorFabric implements Enc
         $cipher = MCRYPT_RIJNDAEL_256;
         $mode = MCRYPT_MODE_CBC;
 
-        /** @noinspection PhpDeprecationInspection */
         $key = substr($this->key, 0, mcrypt_get_key_size($cipher, $mode));
 
         return new McryptEncryptor(

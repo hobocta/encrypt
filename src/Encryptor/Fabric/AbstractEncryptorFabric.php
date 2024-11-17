@@ -10,7 +10,9 @@ abstract class AbstractEncryptorFabric implements EncryptorFabricInterface
 
     /**
      * AbstractEncryptorFabric constructor.
+     *
      * @param $key
+     *
      * @throws EncryptException
      */
     public function __construct($key)

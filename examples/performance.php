@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection DuplicatedCode */
+
 use Hobocta\Encrypt\Encryptor\Implementation\Mcrypt\McryptAvailableChecker;
 use Hobocta\Encrypt\Encryptor\Implementation\Mcrypt\McryptEncryptorFabric;
 use Hobocta\Encrypt\Encryptor\Implementation\OpenSsl\OpenSslAvailableChecker;
@@ -24,7 +26,7 @@ try {
     }
 
     if (McryptAvailableChecker::isAvailable()) {
-        $encryptorFabrics['Mcrypt'] =  new McryptEncryptorFabric($key);
+        $encryptorFabrics['Mcrypt'] = new McryptEncryptorFabric($key);
     }
 } catch (EncryptException $e) {
     die(sprintf('Exception message: %s (%s:%s)', $e->getMessage(), $e->getFile(), $e->getLine()) . PHP_EOL);
@@ -33,11 +35,24 @@ try {
 foreach ($encryptorFabrics as $name => $encryptorFabric) {
     echo $name . ':' . PHP_EOL;
 
-    $encryptors = array(
-        '128 bit' => $encryptorFabric->createEncryptor128(),
-        '192 bit' => $encryptorFabric->createEncryptor192(),
-        '256 bit' => $encryptorFabric->createEncryptor256(),
-    );
+    try {
+        $encryptors = array(
+            '128 bit' => $encryptorFabric->createEncryptor128(),
+            '192 bit' => $encryptorFabric->createEncryptor192(),
+            '256 bit' => $encryptorFabric->createEncryptor256(),
+        );
+    } catch (EncryptException $e) {
+        echo sprintf(
+            '%s: %s at %s:%s%s',
+            get_class($e),
+            $e->getMessage(),
+            $e->getFile(),
+            $e->getLine(),
+            PHP_EOL
+        );
+
+        continue;
+    }
 
     $count = 10000;
 
@@ -57,6 +72,11 @@ foreach ($encryptorFabrics as $name => $encryptorFabric) {
             }
         }
 
-        echo '' . $count . ' encryptions and decryptions at ' . (microtime(true) - $time) . ' s' . PHP_EOL;
+        echo sprintf(
+            '%d encryptions and decryptions at %s s%s',
+            $count,
+            microtime(true) - $time,
+            PHP_EOL
+        );
     }
 }

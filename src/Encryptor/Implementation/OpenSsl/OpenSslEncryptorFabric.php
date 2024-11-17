@@ -1,5 +1,7 @@
 <?php
 
+/** @noinspection PhpComposerExtensionStubsInspection */
+
 namespace Hobocta\Encrypt\Encryptor\Implementation\OpenSsl;
 
 use Hobocta\Encrypt\Encryptor\Fabric\AbstractEncryptorFabric;

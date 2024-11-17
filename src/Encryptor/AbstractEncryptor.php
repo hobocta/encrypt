@@ -11,8 +11,10 @@ abstract class AbstractEncryptor implements EncryptorInterface
 
     /**
      * AbstractEncryptor constructor.
+     *
      * @param $key
      * @param array $options
+     *
      * @throws EncryptException
      */
     public function __construct($key, array $options)
@@ -22,24 +24,6 @@ abstract class AbstractEncryptor implements EncryptorInterface
 
         $this->options = $options;
         $this->validateOptions();
-    }
-
-    abstract protected function getBinaryEncoding();
-
-    protected function getBinaryLength($string)
-    {
-        return function_exists('mb_strlen')
-            ? mb_strlen($string, $this->getBinaryEncoding())
-            : strlen($string);
-    }
-
-    protected function getBinarySubstring($string, $start, $length)
-    {
-        if (function_exists('mb_substr')) {
-            return mb_substr($string, $start, $length, $this->getBinaryEncoding());
-        } else {
-            return substr($string, $start, $length);
-        }
     }
 
     /**
@@ -69,4 +53,22 @@ abstract class AbstractEncryptor implements EncryptorInterface
     }
 
     abstract protected function getOptionKeys();
+
+    protected function getBinaryLength($string)
+    {
+        return function_exists('mb_strlen')
+            ? mb_strlen($string, $this->getBinaryEncoding())
+            : strlen($string);
+    }
+
+    abstract protected function getBinaryEncoding();
+
+    protected function getBinarySubstring($string, $start, $length)
+    {
+        if (function_exists('mb_substr')) {
+            return mb_substr($string, $start, $length, $this->getBinaryEncoding());
+        } else {
+            return substr($string, $start, $length);
+        }
+    }
 }

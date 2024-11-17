@@ -6,5 +6,5 @@ interface EncryptorInterface
 {
     public function encrypt($data);
 
-    public function decrypt($data);
+    public function decrypt($encrypted);
 }
