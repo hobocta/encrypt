@@ -10,5 +10,9 @@
     },
     "autoload": {
         "psr-4": {"Hobocta\\Encrypt\\": "src/"}
+    },
+    "suggest": {
+        "ext-openssl": "Required openssl or mcrypt",
+        "ext-mcrypt": "Required openssl or mcrypt"
     }
 }
